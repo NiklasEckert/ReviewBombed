@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import de.niklaseckert.reviewbombed.core.data.remote.ReviewBombedApi
 import de.niklaseckert.reviewbombed.feature_developer.data.local.DeveloperDb
 import de.niklaseckert.reviewbombed.feature_developer.data.remote.DeveloperApi
 import de.niklaseckert.reviewbombed.feature_developer.data.repository.DeveloperRepositoryImpl
@@ -56,7 +57,7 @@ class DeveloperModule {
     @Singleton
     fun provideReviewBombedApi(): DeveloperApi {
         return Retrofit.Builder()
-            .baseUrl(DeveloperApi.BASE_URL)
+            .baseUrl(ReviewBombedApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(DeveloperApi::class.java)
