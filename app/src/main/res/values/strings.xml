@@ -5,4 +5,5 @@
     <string name="bottom_nav_lists">Lists</string>
     <string name="bottom_nav_reviews">Reviews</string>
     <string name="bottom_nav_profile">Profile</string>
+    <string name="currently_playing_headline">Currently playing</string>
 </resources>

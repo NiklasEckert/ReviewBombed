@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ReviewBombed</string>
-    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_home">Start</string>
     <string name="bottom_nav_lists">Listen</string>
     <string name="bottom_nav_reviews">Reviews</string>
     <string name="bottom_nav_profile">Profil</string>
+    <string name="currently_playing_headline">Momentan beliebt</string>
 </resources>
