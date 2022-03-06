@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.feature_developer.data.util
+package de.niklaseckert.reviewbombed.core.data.util
 
 import java.lang.reflect.Type
 

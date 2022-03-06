@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.feature_developer.data.util
+package de.niklaseckert.reviewbombed.core.data.util
 
 import com.google.gson.Gson
 import java.lang.reflect.Type
