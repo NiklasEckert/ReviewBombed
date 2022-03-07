@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.home
+package de.niklaseckert.reviewbombed.ui.home.components
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
