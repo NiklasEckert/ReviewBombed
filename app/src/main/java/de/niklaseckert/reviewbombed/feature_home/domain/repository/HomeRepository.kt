@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface HomeRepository {
 
     fun getCurrentlyPlaying(): Flow<Resource<List<GameExcerpt>>>
+    fun getFriendsPlaying(): Flow<Resource<List<GameExcerpt>>>
+    fun getFriendsFinished(): Flow<Resource<List<GameExcerpt>>>
 }

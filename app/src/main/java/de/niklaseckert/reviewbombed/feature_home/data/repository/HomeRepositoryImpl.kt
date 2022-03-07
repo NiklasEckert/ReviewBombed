@@ -1,5 +1,6 @@
 package de.niklaseckert.reviewbombed.feature_home.data.repository
 
+import de.niklaseckert.reviewbombed.core.data.local.entity.GameExcerptScope
 import de.niklaseckert.reviewbombed.core.domain.model.GameExcerpt
 import de.niklaseckert.reviewbombed.core.util.Resource
 import de.niklaseckert.reviewbombed.feature_home.data.local.dao.HomeDao
@@ -44,5 +45,67 @@ class HomeRepositoryImpl(
             .getGameExcerptListWithScope(GameExcerptScope.CURRENTLY_PLAYING)
             .map { it.toGameExcerpt() }
         emit(Resource.Success(newCurrentlyPlaying))
+    }
+
+    override fun getFriendsPlaying(): Flow<Resource<List<GameExcerpt>>> = flow {
+        emit(Resource.Loading())
+
+        val friendsPlaying = dao
+            .getGameExcerptListWithScope(GameExcerptScope.FRIENDS_PLAYING)
+            .map { it.toGameExcerpt() }
+        emit(Resource.Loading(data = friendsPlaying))
+
+        try {
+            val remoteFriendsPlaying = api.getFriendsPlaying()
+            dao.deleteGameExcerptWithScope(GameExcerptScope.FRIENDS_PLAYING)
+            dao.insertGameExcerptList(remoteFriendsPlaying
+                .map { it.toGameExcerptEntity(GameExcerptScope.FRIENDS_PLAYING) })
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = "Oops, something went wrong!",
+                data = friendsPlaying
+            ))
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = "Couldn't reach server, check your internet connection.",
+                data = friendsPlaying
+            ))
+        }
+
+        val newFriendsPlaying = dao
+            .getGameExcerptListWithScope(GameExcerptScope.FRIENDS_PLAYING)
+            .map { it.toGameExcerpt() }
+        emit(Resource.Success(newFriendsPlaying))
+    }
+
+    override fun getFriendsFinished(): Flow<Resource<List<GameExcerpt>>> = flow {
+        emit(Resource.Loading())
+
+        val friendsFinished = dao
+            .getGameExcerptListWithScope(GameExcerptScope.FRIENDS_FINISHED)
+            .map { it.toGameExcerpt() }
+        emit(Resource.Loading(data = friendsFinished))
+
+        try {
+            val remoteFriendsFinished = api.getFriendsFinished()
+            dao.deleteGameExcerptWithScope(GameExcerptScope.FRIENDS_FINISHED)
+            dao.insertGameExcerptList(remoteFriendsFinished
+                .map { it.toGameExcerptEntity(GameExcerptScope.FRIENDS_FINISHED) })
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = "Oops, something went wrong!",
+                data = friendsFinished
+            ))
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = "Couldn't reach server, check your internet connection.",
+                data = friendsFinished
+            ))
+        }
+
+        val newFriendsFinished = dao
+            .getGameExcerptListWithScope(GameExcerptScope.FRIENDS_FINISHED)
+            .map { it.toGameExcerpt() }
+        emit(Resource.Success(newFriendsFinished))
     }
 }
