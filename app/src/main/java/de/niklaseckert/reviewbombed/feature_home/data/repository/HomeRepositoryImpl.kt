@@ -18,13 +18,16 @@ class HomeRepositoryImpl(
     override fun getCurrentlyPlaying(): Flow<Resource<List<GameExcerpt>>> = flow {
         emit(Resource.Loading())
 
-        val currentlyPlaying = dao.getAllCurrentlyPlaying().map { it.toGameExcerpt() }
+        val currentlyPlaying = dao
+            .getGameExcerptListWithScope(GameExcerptScope.CURRENTLY_PLAYING)
+            .map { it.toGameExcerpt() }
         emit(Resource.Loading(data = currentlyPlaying))
 
         try {
             val remoteCurrentlyPlaying = api.getCurrentlyPlaying()
-            dao.deleteAllCurrentlyPlaying()
-            dao.insertCurrentlyPlaying(remoteCurrentlyPlaying.map { it.toGameExcerptEntity() })
+            dao.deleteGameExcerptWithScope(GameExcerptScope.CURRENTLY_PLAYING)
+            dao.insertGameExcerptList(remoteCurrentlyPlaying
+                .map { it.toGameExcerptEntity(GameExcerptScope.CURRENTLY_PLAYING) })
         } catch (e: HttpException) {
             emit(Resource.Error(
                 message = "Oops, something went wrong!",
@@ -37,7 +40,9 @@ class HomeRepositoryImpl(
             ))
         }
 
-        val newCurrentlyPlaying = dao.getAllCurrentlyPlaying().map { it.toGameExcerpt() }
+        val newCurrentlyPlaying = dao
+            .getGameExcerptListWithScope(GameExcerptScope.CURRENTLY_PLAYING)
+            .map { it.toGameExcerpt() }
         emit(Resource.Success(newCurrentlyPlaying))
     }
 }
