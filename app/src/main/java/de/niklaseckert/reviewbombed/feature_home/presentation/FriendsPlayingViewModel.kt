@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
 import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetCurrentlyPlaying
+import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetFriendsPlaying
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -16,8 +17,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrentlyPlayingViewModel @Inject constructor(
-    private val getAllCurrentlyPlaying: GetCurrentlyPlaying
+class FriendsPlayingViewModel @Inject constructor(
+    private val getFriendsPlaying: GetFriendsPlaying
 ): ViewModel() {
 
     private val _state = mutableStateOf(GameExcerptListState())
@@ -29,13 +30,13 @@ class CurrentlyPlayingViewModel @Inject constructor(
     private var searchJob: Job? = null
 
     init {
-        loadCurrentlyPlaying()
+        loadFriendsPlaying()
     }
 
-    fun loadCurrentlyPlaying() {
+    fun loadFriendsPlaying() {
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
-            getAllCurrentlyPlaying()
+            getFriendsPlaying()
                 .onEach { result ->
                     when(result) {
                         is Resource.Success -> {
