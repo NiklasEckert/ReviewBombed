@@ -11,7 +11,9 @@ import de.niklaseckert.reviewbombed.feature_home.data.local.HomeDb
 import de.niklaseckert.reviewbombed.feature_home.data.remote.HomeApi
 import de.niklaseckert.reviewbombed.feature_home.data.repository.HomeRepositoryImpl
 import de.niklaseckert.reviewbombed.feature_home.domain.repository.HomeRepository
-import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetAllCurrentlyPlaying
+import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetCurrentlyPlaying
+import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetFriendsFinished
+import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetFriendsPlaying
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -22,8 +24,20 @@ class HomeModule {
 
     @Provides
     @Singleton
-    fun provideGetAllCurrentlyPlayingUseCase(repository: HomeRepository): GetAllCurrentlyPlaying {
-        return GetAllCurrentlyPlaying(repository)
+    fun provideGetCurrentlyPlayingUseCase(repository: HomeRepository): GetCurrentlyPlaying {
+        return GetCurrentlyPlaying(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFriendsPlayingUseCase(repository: HomeRepository): GetFriendsPlaying {
+        return GetFriendsPlaying(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFriendsFinishedUseCase(repository: HomeRepository): GetFriendsFinished {
+        return GetFriendsFinished(repository)
     }
 
     @Provides
