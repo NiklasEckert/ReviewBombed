@@ -5,6 +5,12 @@ import retrofit2.http.GET
 
 interface HomeApi {
 
-    @GET("/home")
+    @GET("/home/currently-playing")
     suspend fun getCurrentlyPlaying(): List<GameExcerptDto>
+
+    @GET("/home/friends-playing")
+    suspend fun getFriendsPlaying(): List<GameExcerptDto>
+
+    @GET("/home/friends-finished")
+    suspend fun getFriendsFinished(): List<GameExcerptDto>
 }
