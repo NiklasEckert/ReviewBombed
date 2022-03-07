@@ -6,4 +6,6 @@
     <string name="bottom_nav_reviews">Reviews</string>
     <string name="bottom_nav_profile">Profil</string>
     <string name="currently_playing_headline">Momentan beliebt</string>
+    <string name="friends_playing_headline">Freunde spielen</string>
+    <string name="friends_finished_headline">Freunde haben beendet</string>
 </resources>
