@@ -11,11 +11,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_home.presentation.FriendsPlayingViewModel
 
 @Composable
-fun FriendsPlayingComponent() {
+fun FriendsPlayingComponent(
+    navController: NavController
+) {
     val friendsPlayingViewModel: FriendsPlayingViewModel = hiltViewModel()
     val friendsPlayingState = friendsPlayingViewModel.state.value
 
@@ -26,6 +29,6 @@ fun FriendsPlayingComponent() {
         modifier = Modifier.padding(start = 8.dp)
     )
     Spacer(modifier = Modifier.height(16.dp))
-    GameExcerptLazyRow(gameExcerptListState = friendsPlayingState)
+    GameExcerptLazyRow(gameExcerptListState = friendsPlayingState, navController = navController)
 
 }
