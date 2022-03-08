@@ -17,7 +17,7 @@ class GameRepositoryImpl(
     override fun getGame(id: Long): Flow<Resource<Game>> = flow {
         emit(Resource.Loading())
 
-        val game = dao.getGameById(id).toGame()
+        val game = dao.getGameById(id)?.toGame()
         emit(Resource.Loading(data = game))
 
         try {
