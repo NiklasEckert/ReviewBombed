@@ -48,25 +48,8 @@ class MainActivity : ComponentActivity() {
                 )
 
                 Scaffold(
-                    floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = { /*TODO*/ },
-                            shape = RoundedCornerShape(50),
-                            backgroundColor = Color.Black
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = null,
-                                tint = Color.White
-                            )
-                        }
-                    },
-                    isFloatingActionButtonDocked = true,
-                    floatingActionButtonPosition = FabPosition.Center,
-
                     bottomBar = {
                         BottomAppBar(
-                            cutoutShape = RoundedCornerShape(percent = 50),
                             content = {
                                 BottomNavigation {
                                     val navBackStackEntry by navController.currentBackStackEntryAsState()

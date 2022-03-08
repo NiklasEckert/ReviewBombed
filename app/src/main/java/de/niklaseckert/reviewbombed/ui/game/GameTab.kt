@@ -3,6 +3,8 @@ package de.niklaseckert.reviewbombed.ui.game
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +20,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.feature_game.presentation.GameViewModel
 import de.niklaseckert.reviewbombed.ui.game.components.DeveloperExcerptComponent
+import de.niklaseckert.reviewbombed.ui.game.components.GameDetail
 import de.niklaseckert.reviewbombed.ui.game.components.PublisherExcerptComponent
 import java.time.format.DateTimeFormatter
 import kotlin.math.min
@@ -29,8 +32,6 @@ fun GameTab(
 ) {
     val gameState = gameViewModel.state.value
 
-    val configuration = LocalConfiguration.current
-
     val rememberScrollState = rememberScrollState()
 
     Box(
@@ -41,53 +42,11 @@ fun GameTab(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState)
             ) {
-                AsyncImage(
-                    model = game.previewImageUrl,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(configuration.screenHeightDp.dp / 2)
-                        .graphicsLayer {
-                            alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
-                            translationY = +rememberScrollState.value * 0.7f
-                        }
+                GameDetail(
+                    game = game,
+                    rememberScrollState = rememberScrollState,
+                    navController = navController
                 )
-                Column(
-                    modifier = Modifier
-                        .background(Color.White)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(all = 8.dp)
-                    ) {
-                        Text(
-                                text = game.title,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 26.sp,
-                        modifier = Modifier
-                            .wrapContentWidth(Alignment.Start)
-                        )
-
-                        Text(
-                            text = game.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                            fontWeight = FontWeight.Light,
-                            fontSize = 16.sp
-                        )
-                        
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = game.description
-                        )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Divider()
-                        PublisherExcerptComponent(navController = navController, publishers = game.publishers)
-
-                        Spacer(modifier = Modifier.height(16.dp))
-                        DeveloperExcerptComponent(navController = navController, developers = game.developers)
-                    }
-
-                }
             }
         }
     }
