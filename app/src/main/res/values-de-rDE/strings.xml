@@ -8,4 +8,6 @@
     <string name="currently_playing_headline">Momentan beliebt</string>
     <string name="friends_playing_headline">Freunde spielen</string>
     <string name="friends_finished_headline">Freunde haben beendet</string>
+    <string name="publisher_comp_headline">Herausgeber</string>
+    <string name="developer_comp_headline">Entwickler</string>
 </resources>
