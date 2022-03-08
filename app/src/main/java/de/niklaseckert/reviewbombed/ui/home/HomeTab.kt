@@ -8,9 +8,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import de.niklaseckert.reviewbombed.ui.home.components.CurrentlyPlayingComponent
+import de.niklaseckert.reviewbombed.ui.home.components.FriendsFinishedComponent
+import de.niklaseckert.reviewbombed.ui.home.components.FriendsPlayingComponent
 
 @Composable
-fun HomeTab() {
+fun HomeTab(
+    navController: NavController
+) {
 
     val scaffoldState = rememberScaffoldState()
     val scrollState = rememberScrollState()
@@ -28,60 +34,13 @@ fun HomeTab() {
 
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                CurrentlyPlayingComponent()
+                CurrentlyPlayingComponent(navController = navController)
                 Spacer(modifier = Modifier.height(16.dp))
-                FriendsPlayingComponent()
+                FriendsPlayingComponent(navController = navController)
                 Spacer(modifier = Modifier.height(16.dp))
-                FriendsFinishedComponent()
+                FriendsFinishedComponent(navController = navController)
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
-
-/*val viewModel: DeveloperViewModel = hiltViewModel()
-    val state = viewModel.state.value
-    val scaffoldState = rememberScaffoldState()
-
-    LaunchedEffect(key1 = true) {
-        viewModel.eventFlow.collectLatest { event ->
-            when(event) {
-                is DeveloperViewModel.UIEvent.ShowSnackbar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = event.message
-                    )
-                }
-            }
-        }
-    }
-
-    Scaffold(
-        scaffoldState = scaffoldState
-    ) {
-        Box(
-            modifier = Modifier.background(MaterialTheme.colors.background)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(state.developerItems.size) { index ->
-                        val developer = state.developerItems[index]
-                        if (index > 0) {
-                            Spacer(modifier = Modifier.height(8.dp))
-                        }
-
-                        DeveloperItem(developer = developer)
-
-                        if (index < state.developerItems.size -1) {
-                            Divider()
-                        }
-                    }
-                }
-            }
-        }
-    }*/
 }
