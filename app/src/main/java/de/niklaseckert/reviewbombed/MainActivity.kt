@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
 import de.niklaseckert.reviewbombed.ui.game.GameTab
 import de.niklaseckert.reviewbombed.ui.home.*
+import de.niklaseckert.reviewbombed.ui.list.ListItemTab
 import de.niklaseckert.reviewbombed.ui.lists.ListsTab
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
@@ -107,7 +108,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable("home") { HomeTab(navController = navController) }
-                        composable("lists") { ListsTab() }
+                        composable("lists") { ListsTab(navController = navController) }
                         composable("reviews") { ReviewsTab() }
                         composable("profile") { ProfileTab() }
                         composable(
@@ -115,6 +116,12 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(navArgument("gameId") { NavType.LongType })
                         ) {
                             GameTab(navController = navController)
+                        }
+                        composable(
+                            route = "list/{listId}",
+                            arguments = listOf(navArgument("listId") { NavType.LongType })
+                        ) {
+                            ListItemTab(navController = navController)
                         }
                     }
                 }
