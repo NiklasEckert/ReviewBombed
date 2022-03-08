@@ -19,7 +19,8 @@ data class GameEntity(
     val developers: List<DeveloperExcerpt>,
     @PrimaryKey val id: Long,
     val publishers: List<PublisherExcerpt>,
-    val title: String
+    val title: String,
+    val previewImageUrl: String
 ) {
     fun toGame(): Game {
         return Game(
@@ -29,7 +30,8 @@ data class GameEntity(
             description = description,
             coverUrl = coverUrl,
             developers = developers,
-            publishers = publishers
+            publishers = publishers,
+            previewImageUrl = previewImageUrl
         )
     }
 }

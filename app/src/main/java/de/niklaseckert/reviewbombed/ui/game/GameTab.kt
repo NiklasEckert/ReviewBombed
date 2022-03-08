@@ -42,7 +42,7 @@ fun GameTab(
                     .verticalScroll(rememberScrollState)
             ) {
                 AsyncImage(
-                    model = game.coverUrl,
+                    model = game.previewImageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

@@ -11,7 +11,8 @@ class Game(
     val developers: List<DeveloperExcerpt>,
     val id: Long,
     val publishers: List<PublisherExcerpt>,
-    val title: String
+    val title: String,
+    val previewImageUrl: String
 ) {
 
 }

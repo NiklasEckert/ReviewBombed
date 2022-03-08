@@ -13,7 +13,8 @@ data class GameDto(
     val developers: List<DeveloperExcerptDto>,
     val id: Long,
     val publishers: List<PublisherExcerptDto>,
-    val title: String
+    val title: String,
+    val previewImageUrl: String
 ) {
     fun toGameEntity(): GameEntity {
         return GameEntity(
@@ -23,7 +24,8 @@ data class GameDto(
             date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
             coverUrl = coverUrl,
             developers = developers.map { it.toDeveloperExcerpt() },
-            publishers = publishers.map { it.toPublisherExcerpt() }
+            publishers = publishers.map { it.toPublisherExcerpt() },
+            previewImageUrl = previewImageUrl
         )
     }
 }

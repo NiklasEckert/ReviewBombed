@@ -9,13 +9,15 @@ data class GameExcerptEntity(
     val id: Long,
     val title: String,
     val coverUrl: String,
-    val scope: GameExcerptScope
+    val scope: GameExcerptScope,
+    val previewImageUrl: String
 ) {
     fun toGameExcerpt(): GameExcerpt {
         return GameExcerpt(
             id = id,
             title = title,
-            coverUrl = coverUrl
+            coverUrl = coverUrl,
+            previewImageUrl = previewImageUrl
         )
     }
 }
