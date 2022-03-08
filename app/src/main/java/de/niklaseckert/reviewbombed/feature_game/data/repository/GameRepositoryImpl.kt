@@ -36,7 +36,7 @@ class GameRepositoryImpl(
             ))
         }
 
-        val newGame = dao.getGameById(id).toGame()
+        val newGame = dao.getGameById(id)?.toGame()
         emit(Resource.Success(data = newGame))
     }
 }

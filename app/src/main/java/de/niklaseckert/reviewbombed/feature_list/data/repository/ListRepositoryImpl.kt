@@ -64,7 +64,7 @@ class ListRepositoryImpl(
             ))
         }
 
-        val newList = dao.getListById(id).toListModel()
+        val newList = dao.getListById(id)?.toListModel()
         emit(Resource.Success(newList))
     }
 }

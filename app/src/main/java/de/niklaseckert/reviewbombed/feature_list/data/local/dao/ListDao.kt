@@ -26,5 +26,5 @@ interface ListDao {
     suspend fun getAllListExcerptsEntities(): List<ListExcerptEntity>
 
     @Query("SELECT * FROM listentity WHERE id = :id LIMIT 1")
-    suspend fun getListById(id: Long): ListEntity
+    suspend fun getListById(id: Long): ListEntity?
 }
