@@ -68,8 +68,6 @@ fun GameTab(
                             .wrapContentWidth(Alignment.Start)
                         )
 
-
-
                         Text(
                             text = game.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                             fontWeight = FontWeight.Light,
@@ -87,7 +85,6 @@ fun GameTab(
 
                         Spacer(modifier = Modifier.height(16.dp))
                         DeveloperExcerptComponent(navController = navController, developers = game.developers)
-                        
                     }
 
                 }
