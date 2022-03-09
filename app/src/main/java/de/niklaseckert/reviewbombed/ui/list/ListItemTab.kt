@@ -9,11 +9,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.presentation.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListViewModel
 
@@ -33,7 +35,7 @@ fun ListItemTab(
         listState.listModelItem?.let { listModel ->
             Column() {
                 Text(
-                    text = listModel.name,
+                    text = stringResource(id = R.string.list_headline) + ": " + listModel.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 26.sp
                 )
@@ -45,9 +47,9 @@ fun ListItemTab(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 LazyVerticalGrid(
-                    cells = GridCells.Fixed(2),
+                    cells = GridCells.Fixed(3),
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxSize(),
                         //.width(128.dp)
                         //.height(180.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp),

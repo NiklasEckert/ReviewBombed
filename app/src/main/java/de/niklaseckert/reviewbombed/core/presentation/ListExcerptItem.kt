@@ -25,6 +25,7 @@ fun ListExcerptItem(
             modifier = modifier
                 .clickable { navController.navigate("list/" + listExcerpt.id) }
         ) {
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = listExcerpt.name,
                 fontWeight = FontWeight.Bold,
@@ -37,6 +38,5 @@ fun ListExcerptItem(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Divider()
-            Spacer(modifier = Modifier.height(8.dp))
         }
 }
