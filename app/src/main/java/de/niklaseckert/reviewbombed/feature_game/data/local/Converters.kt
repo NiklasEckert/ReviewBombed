@@ -3,10 +3,10 @@ package de.niklaseckert.reviewbombed.feature_game.data.local
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
-import de.niklaseckert.reviewbombed.core.data.local.entity.DeveloperExcerptEntity
 import de.niklaseckert.reviewbombed.core.data.util.JsonParser
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
+import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -50,6 +50,22 @@ class Converters(
         return jsonParser.fromJson<ArrayList<PublisherExcerpt>>(
             json,
             object : TypeToken<ArrayList<PublisherExcerpt>>(){}.type
+        ) ?: emptyList()
+    }
+
+    @TypeConverter
+    fun fromScreenshotsListToJson(list: List<ScreenshotExcerpt>): String {
+        return jsonParser.toJson(
+            list,
+            object : TypeToken<ArrayList<ScreenshotExcerpt>>(){}.type
+        ) ?: "[]"
+    }
+
+    @TypeConverter
+    fun fromJsonToScreenshotsList(json: String): List<ScreenshotExcerpt> {
+        return jsonParser.fromJson<ArrayList<ScreenshotExcerpt>>(
+            json,
+            object : TypeToken<ArrayList<ScreenshotExcerpt>>(){}.type
         ) ?: emptyList()
     }
 }
