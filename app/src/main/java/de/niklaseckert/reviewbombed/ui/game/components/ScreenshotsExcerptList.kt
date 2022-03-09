@@ -19,7 +19,9 @@ fun ScreenshotExcerptList(
         items(screenshots.size) { index ->
             ScreenshotExcerptItem(screenshotExcerpt = screenshots[index], navController = navController)
 
-            Spacer(modifier = Modifier.width(8.dp))
+            if (index < screenshots.size-1) {
+                Spacer(modifier = Modifier.width(8.dp))
+            }
         }
     }
 }
