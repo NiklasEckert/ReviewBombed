@@ -8,6 +8,7 @@ import de.niklaseckert.reviewbombed.core.data.remote.dto.DeveloperExcerptDto
 import de.niklaseckert.reviewbombed.core.data.remote.dto.PublisherExcerptDto
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
+import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
 import java.time.LocalDate
 
@@ -20,7 +21,8 @@ data class GameEntity(
     @PrimaryKey val id: Long,
     val publishers: List<PublisherExcerpt>,
     val title: String,
-    val previewImageUrl: String
+    val previewImageUrl: String,
+    val screenshots: List<ScreenshotExcerpt>
 ) {
     fun toGame(): Game {
         return Game(
@@ -31,7 +33,8 @@ data class GameEntity(
             coverUrl = coverUrl,
             developers = developers,
             publishers = publishers,
-            previewImageUrl = previewImageUrl
+            previewImageUrl = previewImageUrl,
+            screenshots = screenshots
         )
     }
 }

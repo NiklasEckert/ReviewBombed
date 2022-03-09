@@ -2,6 +2,7 @@ package de.niklaseckert.reviewbombed.feature_game.data.remote.dto
 
 import de.niklaseckert.reviewbombed.core.data.remote.dto.DeveloperExcerptDto
 import de.niklaseckert.reviewbombed.core.data.remote.dto.PublisherExcerptDto
+import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
 import de.niklaseckert.reviewbombed.feature_game.data.local.entity.GameEntity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -14,7 +15,8 @@ data class GameDto(
     val id: Long,
     val publishers: List<PublisherExcerptDto>,
     val title: String,
-    val previewImageUrl: String
+    val previewImageUrl: String,
+    val screenshots: List<ScreenshotExcerpt>
 ) {
     fun toGameEntity(): GameEntity {
         return GameEntity(
@@ -25,7 +27,8 @@ data class GameDto(
             coverUrl = coverUrl,
             developers = developers.map { it.toDeveloperExcerpt() },
             publishers = publishers.map { it.toPublisherExcerpt() },
-            previewImageUrl = previewImageUrl
+            previewImageUrl = previewImageUrl,
+            screenshots = screenshots
         )
     }
 }
