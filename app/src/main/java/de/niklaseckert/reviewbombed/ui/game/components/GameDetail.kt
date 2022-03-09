@@ -98,6 +98,13 @@ fun GameDetail(
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Divider()
+                ScreenshotExcerptComponent(
+                    screenshots = game.screenshots,
+                    navController = navController
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Divider()
                 PublisherExcerptComponent(
                     navController = navController,
                     publishers = game.publishers
