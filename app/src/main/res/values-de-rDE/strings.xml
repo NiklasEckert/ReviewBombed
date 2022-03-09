@@ -10,4 +10,5 @@
     <string name="friends_finished_headline">Freunde haben beendet</string>
     <string name="publisher_comp_headline">Herausgeber</string>
     <string name="developer_comp_headline">Entwickler</string>
+    <string name="list_headline">Liste</string>
 </resources>
