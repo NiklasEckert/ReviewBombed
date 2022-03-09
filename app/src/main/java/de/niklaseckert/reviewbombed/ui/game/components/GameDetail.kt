@@ -3,7 +3,6 @@ package de.niklaseckert.reviewbombed.ui.game.components
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -13,8 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +34,7 @@ fun GameDetail(
     val configuration = LocalConfiguration.current
 
     ConstraintLayout() {
-        val (image, fab, info) = createRefs()
+        val (image, sp, fab, info) = createRefs()
 
         AsyncImage(
             model = game.previewImageUrl,
@@ -51,6 +49,23 @@ fun GameDetail(
                 }
         )
 
+        Spacer(
+            modifier = Modifier
+                .height(100.dp)
+                .fillMaxWidth()
+                .constrainAs(sp) {
+                    bottom.linkTo(image.bottom)
+                }
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.White
+                        )
+                    )
+                )
+        )
+
         Column(
             modifier = Modifier
                 .background(Color.White)
@@ -61,6 +76,7 @@ fun GameDetail(
             Column(
                 modifier = Modifier.padding(all = 8.dp)
             ) {
+                Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = game.title,
                     fontWeight = FontWeight.Bold,
@@ -93,6 +109,7 @@ fun GameDetail(
                     developers = game.developers
                 )
             }
+
         }
 
         FloatingActionButton(
@@ -109,7 +126,6 @@ fun GameDetail(
                 tint = Color.White
             )
         }
-
 
     }
 }
