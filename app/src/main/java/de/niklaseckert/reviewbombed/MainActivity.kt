@@ -49,40 +49,29 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        BottomAppBar(
-                            content = {
-                                BottomNavigation {
-                                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-                                    val currentDestination = navBackStackEntry?.destination
 
-                                    items.forEachIndexed{ index, screen ->
-                                        BottomNavigationItem(
-                                            icon = { Icon(imageVector = screen.icon, contentDescription = null) },
-                                            label = {
-                                                Text(
-                                                    text = stringResource(id = screen.resourceId),
-                                                    softWrap = false
-                                                )
-                                            },
-                                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                                            onClick = {
-                                                navController.navigate(screen.route) {
-                                                    popUpTo(navController.graph.findStartDestination().id) {
-                                                        saveState = true
-                                                    }
+                        BottomNavigation {
+                            val navBackStackEntry by navController.currentBackStackEntryAsState()
+                            val currentDestination = navBackStackEntry?.destination
 
-                                                    launchSingleTop = true
-                                                    restoreState = true
-                                                }
+                            items.forEach{ screen ->
+                                BottomNavigationItem(
+                                    icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+                                    label = { Text(text = stringResource(id = screen.resourceId)) },
+                                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                                    onClick = {
+                                        navController.navigate(screen.route) {
+                                            popUpTo(navController.graph.findStartDestination().id) {
+                                                saveState = true
                                             }
-                                        )
-                                        if (index == 1) {
-                                            Spacer(modifier = Modifier.weight(.5f))
+
+                                            launchSingleTop = true
+                                            restoreState = true
                                         }
                                     }
-                                }
+                                )
                             }
-                        )
+                        }
                     }
                 ) { innerPadding ->
                     NavHost(
