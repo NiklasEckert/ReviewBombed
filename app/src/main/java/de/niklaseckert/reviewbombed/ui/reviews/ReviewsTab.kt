@@ -39,12 +39,14 @@ fun ReviewsTab(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(vertical = 16.dp)
             ) {
                 Text(
                     text = stringResource(id = R.string.review_headline),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 36.sp
+                    fontSize = 36.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
                 )
 
                 LazyColumn() {
@@ -53,7 +55,10 @@ fun ReviewsTab(
 
                         ReviewExcerptItem(review = review, navController = navController)
 
-                        Divider()
+                        Divider(
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp)
+                        )
                     }
                 }
             }

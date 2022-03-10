@@ -28,6 +28,7 @@ import de.niklaseckert.reviewbombed.ui.home.*
 import de.niklaseckert.reviewbombed.ui.list.ListItemTab
 import de.niklaseckert.reviewbombed.ui.lists.ListsTab
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
+import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
@@ -94,6 +95,12 @@ class MainActivity : ComponentActivity() {
                             arguments = listOf(navArgument("listId") { NavType.LongType })
                         ) {
                             ListItemTab(navController = navController)
+                        }
+                        composable(
+                            route = "review/{reviewId}",
+                            arguments = listOf(navArgument("reviewId") { NavType.LongType} )
+                        ) {
+                            ReviewDetailsScreen(navController = navController)
                         }
                     }
                 }

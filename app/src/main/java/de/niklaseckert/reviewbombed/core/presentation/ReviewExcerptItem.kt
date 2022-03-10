@@ -24,8 +24,9 @@ fun ReviewExcerptItem(
 ) {
     Box(
         modifier = Modifier
-            .clickable { /* navController.navigate("review/" + review.id) */ }
-            .padding(vertical = 8.dp)
+            .clickable { navController.navigate("review/" + review.id) }
+            .padding(all = 8.dp)
+            .fillMaxWidth()
     ) {
         Column() {
             Text(
@@ -35,7 +36,9 @@ fun ReviewExcerptItem(
             )
             ReviewBombedRatingBar(rating = review.rate)
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier
+                .height(4.dp)
+            )
 
             Row() {
                 Column(
@@ -58,6 +61,5 @@ fun ReviewExcerptItem(
                 }
             }
         }
-
     }
 }
