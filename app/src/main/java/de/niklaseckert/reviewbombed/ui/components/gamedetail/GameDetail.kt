@@ -4,28 +4,22 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.*
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
 import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
+import de.niklaseckert.reviewbombed.ui.components.general.GameDetailHeadline
+import de.niklaseckert.reviewbombed.ui.components.general.LocalDateText
 import de.niklaseckert.reviewbombed.ui.components.publisherexcerpts.PublisherExcerptListComponent
 import de.niklaseckert.reviewbombed.ui.components.screenshots.ScreenshotExcerptListComponent
-import java.time.format.DateTimeFormatter
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlin.math.min
 
 @Composable
@@ -36,8 +30,8 @@ fun GameDetail(
 ) {
     val configuration = LocalConfiguration.current
 
-    ConstraintLayout() {
-        val (image, sp, fab, info) = createRefs()
+    ConstraintLayout {
+        val (image, sp, fab, info, comps) = createRefs()
 
         GameDetailPreviewImage(
             url = game.previewImageUrl,
@@ -54,7 +48,7 @@ fun GameDetail(
                 }
         )
 
-        Column(
+        Box(
             modifier = Modifier
                 .background(Color.White)
                 .constrainAs(info) {
@@ -62,43 +56,41 @@ fun GameDetail(
                 }
         ) {
             Column(
-                modifier = Modifier.padding(all = 8.dp)
+                modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
             ) {
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = game.title,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 26.sp,
-                    modifier = Modifier
-                        .wrapContentWidth(Alignment.Start)
-                )
-
-                Text(
-                    text = game.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                    fontWeight = FontWeight.Light,
-                    fontSize = 16.sp
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
+                GameDetailHeadline(text = game.title)
+                LocalDateText(date = game.date)
                 Text(
                     text = game.description
                 )
+            }
+        }
 
-                Spacer(modifier = Modifier.height(16.dp))
+        Box(
+            modifier = Modifier
+                .background(Color.White)
+                .constrainAs(comps) {
+                    top.linkTo(info.bottom)
+                }
+        ) {
+            Column(
+                modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+            ) {
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
                 Divider()
                 ScreenshotExcerptListComponent(
                     screenshots = game.screenshots,
                     navController = navController
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
                 Divider()
                 PublisherExcerptListComponent(
                     navController = navController,
                     publishers = game.publishers
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
                 DeveloperExcerptListComponent(
                     navController = navController,
                     developers = game.developers
@@ -107,20 +99,12 @@ fun GameDetail(
 
         }
 
-        FloatingActionButton(
-            onClick = { /*TODO*/ },
+        GameDetailFloatingActionButton(
             modifier = Modifier
                 .constrainAs(fab) {
                     centerAround(image.bottom)
                     absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
                 }
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Add,
-                contentDescription = null,
-                tint = Color.White
-            )
-        }
-
+        )
     }
 }
