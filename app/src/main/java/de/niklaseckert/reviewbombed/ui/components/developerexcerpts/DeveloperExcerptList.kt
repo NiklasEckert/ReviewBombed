@@ -5,7 +5,7 @@ import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
-import de.niklaseckert.reviewbombed.core.presentation.DeveloperExcerptItem
+import de.niklaseckert.reviewbombed.ui.components.items.DeveloperExcerptItem
 
 @Composable
 fun DevelopersExcerptList(

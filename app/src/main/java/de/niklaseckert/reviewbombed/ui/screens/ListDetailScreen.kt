@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
-import de.niklaseckert.reviewbombed.core.presentation.GameExcerptItem
+import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListViewModel
 
 @OptIn(ExperimentalFoundationApi::class)

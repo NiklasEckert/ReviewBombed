@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
-import de.niklaseckert.reviewbombed.core.presentation.ReviewExcerptItem
+import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
 
 @Composable

@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
-import de.niklaseckert.reviewbombed.core.presentation.ScreenshotExcerptItem
+import de.niklaseckert.reviewbombed.ui.components.items.ScreenshotExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable

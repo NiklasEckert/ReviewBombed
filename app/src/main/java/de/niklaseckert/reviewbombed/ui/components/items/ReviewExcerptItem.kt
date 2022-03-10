@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.core.presentation
+package de.niklaseckert.reviewbombed.ui.components.items
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

@@ -5,7 +5,7 @@ import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
-import de.niklaseckert.reviewbombed.core.presentation.PublisherExcerptItem
+import de.niklaseckert.reviewbombed.ui.components.items.PublisherExcerptItem
 
 @Composable
 fun PublisherExcerptList(
