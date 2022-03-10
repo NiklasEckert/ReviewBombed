@@ -9,13 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_home.presentation.FriendsFinishedViewModel
-import de.niklaseckert.reviewbombed.ui.home.components.GameExcerptLazyRow
+import de.niklaseckert.reviewbombed.ui.components.general.GameExcerptLazyRow
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable

@@ -14,7 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_home.presentation.FriendsPlayingViewModel
-import de.niklaseckert.reviewbombed.ui.home.components.GameExcerptLazyRow
+import de.niklaseckert.reviewbombed.ui.components.general.GameExcerptLazyRow
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
