@@ -35,11 +35,12 @@ fun ScreenHeadline(
 fun Headline(
     text: String,
     fontSize: TextUnit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fontWeight: FontWeight? = FontWeight.Bold,
 ) {
     Text(
         text = text,
-        fontWeight = FontWeight.Bold,
+        fontWeight = fontWeight,
         fontSize = fontSize,
         modifier = modifier
     )
