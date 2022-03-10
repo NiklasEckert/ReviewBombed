@@ -19,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
-import de.niklaseckert.reviewbombed.ui.lists.ListsTab
+import de.niklaseckert.reviewbombed.ui.lists.ListsScreen
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable("home") { HomeScreen(navController = navController) }
-                        composable("lists") { ListsTab(navController = navController) }
+                        composable("lists") { ListsScreen(navController = navController) }
                         composable("reviews") { ReviewsTab(navController = navController) }
                         composable("profile") { ProfileTab() }
                         composable(
