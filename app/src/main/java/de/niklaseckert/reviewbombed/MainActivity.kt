@@ -3,12 +3,15 @@ package de.niklaseckert.reviewbombed
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -20,8 +23,10 @@ import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.lists.ListsScreen
 import de.niklaseckert.reviewbombed.ui.screens.*
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
 @AndroidEntryPoint
@@ -41,8 +46,10 @@ class MainActivity : ComponentActivity() {
                 )
 
                 Scaffold(
+                    topBar = {
+                        ReviewBombedCustomTopBar()
+                    },
                     bottomBar = {
-
                         BottomNavigation {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentDestination = navBackStackEntry?.destination
