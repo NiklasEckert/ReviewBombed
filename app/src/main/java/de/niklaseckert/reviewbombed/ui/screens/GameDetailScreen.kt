@@ -57,7 +57,7 @@ fun GameDetailScreen(
 
             Box(
                 modifier = Modifier
-                    .background(Color.White)
+                    .background(MaterialTheme.colors.background)
                     .constrainAs(info) {
                         top.linkTo(image.bottom)
                     }
@@ -75,7 +75,7 @@ fun GameDetailScreen(
 
             Box(
                 modifier = Modifier
-                    .background(Color.White)
+                    .background(MaterialTheme.colors.background)
                     .constrainAs(comps) {
                         top.linkTo(info.bottom)
                     }
