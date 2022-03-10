@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import de.niklaseckert.reviewbombed.core.data.LocalDateConverter
 import de.niklaseckert.reviewbombed.core.data.remote.ReviewBombedApi
 import de.niklaseckert.reviewbombed.core.data.util.GsonParser
 import de.niklaseckert.reviewbombed.feature_game.data.local.Converters
@@ -42,7 +43,9 @@ class GameModule {
             app,
             GameDb::class.java,
             "GameDb"
-        ).addTypeConverter(Converters(GsonParser(Gson())))
+        )
+            .addTypeConverter(Converters(GsonParser(Gson())))
+            .addTypeConverter(LocalDateConverter())
             .build()
     }
 
