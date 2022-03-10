@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.review
+package de.niklaseckert.reviewbombed.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider

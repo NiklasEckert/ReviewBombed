@@ -20,7 +20,7 @@ import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
 import de.niklaseckert.reviewbombed.ui.lists.ListsScreen
-import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
+import de.niklaseckert.reviewbombed.ui.screens.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
 import de.niklaseckert.reviewbombed.ui.screens.GameDetailScreen
 import de.niklaseckert.reviewbombed.ui.screens.HomeScreen
