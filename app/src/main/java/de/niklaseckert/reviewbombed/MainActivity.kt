@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
+import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
 import de.niklaseckert.reviewbombed.ui.lists.ListsScreen
 import de.niklaseckert.reviewbombed.ui.screens.*
@@ -33,10 +34,10 @@ class MainActivity : ComponentActivity() {
 
                 val navController = rememberNavController()
                 val items = listOf(
-                    ReviewBombedScreen.Home,
-                    ReviewBombedScreen.Lists,
-                    ReviewBombedScreen.Reviews,
-                    ReviewBombedScreen.Profile
+                    ReviewBombedNavigationScreen.Home,
+                    ReviewBombedNavigationScreen.Lists,
+                    ReviewBombedNavigationScreen.Reviews,
+                    ReviewBombedNavigationScreen.Profile
                 )
 
                 Scaffold(
@@ -73,27 +74,27 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = ReviewBombedScreen.Home.route,
+                        startDestination = ReviewBombedNavigationScreen.Home.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable("home") { HomeScreen(navController = navController) }
-                        composable("lists") { ListsScreen(navController = navController) }
-                        composable("reviews") { ReviewsScreen(navController = navController) }
-                        composable("profile") { ProfileDetailScreen() }
+                        composable(route = ReviewBombedNavigationScreen.Home.route) { HomeScreen(navController = navController) }
+                        composable(route = ReviewBombedNavigationScreen.Lists.route) { ListsScreen(navController = navController) }
+                        composable(route = ReviewBombedNavigationScreen.Reviews.route) { ReviewsScreen(navController = navController) }
+                        composable(route = ReviewBombedNavigationScreen.Profile.route) { ProfileDetailScreen() }
                         composable(
-                            route = "game/{gameId}",
+                            route = ReviewBombedScreen.GameDetail.route,
                             arguments = listOf(navArgument("gameId") { NavType.LongType })
                         ) {
                             GameDetailScreen(navController = navController)
                         }
                         composable(
-                            route = "list/{listId}",
+                            route = ReviewBombedScreen.ListDetail.route,
                             arguments = listOf(navArgument("listId") { NavType.LongType })
                         ) {
                             ListDetailScreen(navController = navController)
                         }
                         composable(
-                            route = "review/{reviewId}",
+                            route = ReviewBombedScreen.ReviewDetail.route,
                             arguments = listOf(navArgument("reviewId") { NavType.LongType })
                         ) {
                             ReviewDetailsScreen(navController = navController)

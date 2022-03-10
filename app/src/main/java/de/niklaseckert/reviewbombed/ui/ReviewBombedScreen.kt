@@ -9,9 +9,18 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import de.niklaseckert.reviewbombed.R
 
-sealed class ReviewBombedScreen(val route: String, @StringRes val resourceId: Int, val icon: ImageVector) {
-    object Home : ReviewBombedScreen("home", R.string.bottom_nav_home, Icons.Filled.Home)
-    object Lists : ReviewBombedScreen("lists", R.string.bottom_nav_lists, Icons.Filled.List)
-    object Reviews : ReviewBombedScreen("reviews", R.string.bottom_nav_reviews, Icons.Filled.Star)
-    object Profile : ReviewBombedScreen("profile", R.string.bottom_nav_profile, Icons.Filled.Person)
+sealed class ReviewBombedNavigationScreen(override val route: String, @StringRes val resourceId: Int, val icon: ImageVector) : ReviewBombedScreen(route = route) {
+    object Home     : ReviewBombedNavigationScreen(route = "home", R.string.bottom_nav_home, Icons.Filled.Home)
+    object Lists    : ReviewBombedNavigationScreen(route = "lists", R.string.bottom_nav_lists, Icons.Filled.List)
+    object Reviews  : ReviewBombedNavigationScreen(route = "reviews", R.string.bottom_nav_reviews, Icons.Filled.Star)
+    object Profile  : ReviewBombedNavigationScreen(route = "profile", R.string.bottom_nav_profile, Icons.Filled.Person)
 }
+
+sealed class ReviewBombedScreen(open val route: String) {
+    object GameDetail       : ReviewBombedScreen(route = "game/{gameId}")
+    object ListDetail       : ReviewBombedScreen(route = "list/{listId}")
+    object ReviewDetail     : ReviewBombedScreen(route = "review/{reviewId}")
+    object ProfileDetail    : ReviewBombedScreen(route = "profile/{profileId}")
+}
+
+
