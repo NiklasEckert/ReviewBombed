@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.home
+package de.niklaseckert.reviewbombed.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,7 +14,7 @@ import de.niklaseckert.reviewbombed.ui.components.home.FriendsFinishedComponent
 import de.niklaseckert.reviewbombed.ui.components.home.FriendsPlayingComponent
 
 @Composable
-fun HomeTab(
+fun HomeScreen(
     navController: NavController
 ) {
 

@@ -19,13 +19,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
-import de.niklaseckert.reviewbombed.ui.home.*
 import de.niklaseckert.reviewbombed.ui.list.ListItemTab
 import de.niklaseckert.reviewbombed.ui.lists.ListsTab
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
 import de.niklaseckert.reviewbombed.ui.screens.GameDetailScreen
+import de.niklaseckert.reviewbombed.ui.screens.HomeScreen
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
 @AndroidEntryPoint
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ReviewBombedTheme {
-                
+
                 val navController = rememberNavController()
                 val items = listOf(
                     ReviewBombedScreen.Home,
@@ -51,9 +51,14 @@ class MainActivity : ComponentActivity() {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentDestination = navBackStackEntry?.destination
 
-                            items.forEach{ screen ->
+                            items.forEach { screen ->
                                 BottomNavigationItem(
-                                    icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+                                    icon = {
+                                        Icon(
+                                            imageVector = screen.icon,
+                                            contentDescription = null
+                                        )
+                                    },
                                     label = { Text(text = stringResource(id = screen.resourceId)) },
                                     selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                                     onClick = {
@@ -76,7 +81,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = ReviewBombedScreen.Home.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable("home") { HomeTab(navController = navController) }
+                        composable("home") { HomeScreen(navController = navController) }
                         composable("lists") { ListsTab(navController = navController) }
                         composable("reviews") { ReviewsTab(navController = navController) }
                         composable("profile") { ProfileTab() }
@@ -94,7 +99,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(
                             route = "review/{reviewId}",
-                            arguments = listOf(navArgument("reviewId") { NavType.LongType} )
+                            arguments = listOf(navArgument("reviewId") { NavType.LongType })
                         ) {
                             ReviewDetailsScreen(navController = navController)
                         }
