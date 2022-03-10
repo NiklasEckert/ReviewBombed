@@ -20,12 +20,12 @@ import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
 import de.niklaseckert.reviewbombed.ui.lists.ListsScreen
-import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
 import de.niklaseckert.reviewbombed.ui.screens.GameDetailScreen
 import de.niklaseckert.reviewbombed.ui.screens.HomeScreen
 import de.niklaseckert.reviewbombed.ui.screens.ListDetailScreen
+import de.niklaseckert.reviewbombed.ui.screens.ProfileDetailScreen
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
 @AndroidEntryPoint
@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
                         composable("home") { HomeScreen(navController = navController) }
                         composable("lists") { ListsScreen(navController = navController) }
                         composable("reviews") { ReviewsTab(navController = navController) }
-                        composable("profile") { ProfileTab() }
+                        composable("profile") { ProfileDetailScreen() }
                         composable(
                             route = "game/{gameId}",
                             arguments = listOf(navArgument("gameId") { NavType.LongType })
