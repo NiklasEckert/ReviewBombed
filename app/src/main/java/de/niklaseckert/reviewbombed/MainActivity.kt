@@ -4,13 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -23,13 +19,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
-import de.niklaseckert.reviewbombed.ui.game.GameTab
 import de.niklaseckert.reviewbombed.ui.home.*
 import de.niklaseckert.reviewbombed.ui.list.ListItemTab
 import de.niklaseckert.reviewbombed.ui.lists.ListsTab
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
+import de.niklaseckert.reviewbombed.ui.screens.GameDetailScreen
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
 @AndroidEntryPoint
@@ -88,7 +84,7 @@ class MainActivity : ComponentActivity() {
                             route = "game/{gameId}",
                             arguments = listOf(navArgument("gameId") { NavType.LongType })
                         ) {
-                            GameTab(navController = navController)
+                            GameDetailScreen(navController = navController)
                         }
                         composable(
                             route = "list/{listId}",

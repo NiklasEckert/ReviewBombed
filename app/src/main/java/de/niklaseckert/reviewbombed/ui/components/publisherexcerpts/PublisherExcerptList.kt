@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.game.components
+package de.niklaseckert.reviewbombed.ui.components.publisherexcerpts
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Divider
@@ -8,7 +8,7 @@ import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
 import de.niklaseckert.reviewbombed.core.presentation.PublisherExcerptItem
 
 @Composable
-fun PublishersExcerptList(
+fun PublisherExcerptList(
     publishers: List<PublisherExcerpt>,
     navController: NavController
 ) {

@@ -8,12 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.presentation.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
-import de.niklaseckert.reviewbombed.ui.ratingbar.ReviewBombedRatingBar
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
 import java.time.format.DateTimeFormatter
 
 @Composable

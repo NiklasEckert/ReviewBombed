@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.game.components
+package de.niklaseckert.reviewbombed.ui.components.gamedetail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -22,6 +22,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
+import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
+import de.niklaseckert.reviewbombed.ui.components.publisherexcerpts.PublisherExcerptListComponent
+import de.niklaseckert.reviewbombed.ui.components.screenshots.ScreenshotExcerptListComponent
 import java.time.format.DateTimeFormatter
 import kotlin.math.min
 
@@ -98,20 +101,20 @@ fun GameDetail(
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Divider()
-                ScreenshotExcerptComponent(
+                ScreenshotExcerptListComponent(
                     screenshots = game.screenshots,
                     navController = navController
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
                 Divider()
-                PublisherExcerptComponent(
+                PublisherExcerptListComponent(
                     navController = navController,
                     publishers = game.publishers
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-                DeveloperExcerptComponent(
+                DeveloperExcerptListComponent(
                     navController = navController,
                     developers = game.developers
                 )

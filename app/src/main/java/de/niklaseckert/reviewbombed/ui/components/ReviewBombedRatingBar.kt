@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.ratingbar
+package de.niklaseckert.reviewbombed.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size

@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.game.components
+package de.niklaseckert.reviewbombed.ui.components.publisherexcerpts
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -14,7 +14,7 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
 
 @Composable
-fun PublisherExcerptComponent(
+fun PublisherExcerptListComponent(
     navController: NavController,
     publishers: List<PublisherExcerpt>
 ) {
@@ -25,5 +25,5 @@ fun PublisherExcerptComponent(
         fontWeight = FontWeight.Bold
     )
     Spacer(modifier = Modifier.height(8.dp))
-    PublishersExcerptList(publishers = publishers, navController = navController)
+    PublisherExcerptList(publishers = publishers, navController = navController)
 }

@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.game.components
+package de.niklaseckert.reviewbombed.ui.components.developerexcerpts
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Divider
