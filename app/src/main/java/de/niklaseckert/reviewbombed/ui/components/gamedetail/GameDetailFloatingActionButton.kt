@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun GameDetailFloatingActionButton(
-    onClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     FloatingActionButton(
         onClick = onClick,
@@ -19,8 +19,7 @@ fun GameDetailFloatingActionButton(
     ) {
         Icon(
             imageVector = Icons.Filled.Add,
-            contentDescription = null,
-            tint = Color.White
+            contentDescription = null
         )
     }
 }
