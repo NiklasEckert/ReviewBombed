@@ -19,13 +19,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
-import de.niklaseckert.reviewbombed.ui.list.ListItemTab
 import de.niklaseckert.reviewbombed.ui.lists.ListsTab
 import de.niklaseckert.reviewbombed.ui.profile.ProfileTab
 import de.niklaseckert.reviewbombed.ui.review.ReviewDetailsScreen
 import de.niklaseckert.reviewbombed.ui.reviews.ReviewsTab
 import de.niklaseckert.reviewbombed.ui.screens.GameDetailScreen
 import de.niklaseckert.reviewbombed.ui.screens.HomeScreen
+import de.niklaseckert.reviewbombed.ui.screens.ListDetailScreen
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
 @AndroidEntryPoint
@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                             route = "list/{listId}",
                             arguments = listOf(navArgument("listId") { NavType.LongType })
                         ) {
-                            ListItemTab(navController = navController)
+                            ListDetailScreen(navController = navController)
                         }
                         composable(
                             route = "review/{reviewId}",

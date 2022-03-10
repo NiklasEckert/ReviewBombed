@@ -1,4 +1,4 @@
-package de.niklaseckert.reviewbombed.ui.list
+package de.niklaseckert.reviewbombed.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -21,7 +21,7 @@ import de.niklaseckert.reviewbombed.feature_list.presentation.ListViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListItemTab(
+fun ListDetailScreen(
     listViewModel: ListViewModel = hiltViewModel(),
     navController: NavController
 ) {
@@ -59,12 +59,6 @@ fun ListItemTab(
                         GameExcerptItem(gameExcerpt = listModel.games[index], navController = navController)
                     }
                 }
-
-                /*Row() {
-                    listModel.games.forEach { game ->
-                        GameExcerptItem(gameExcerpt = game, navController = navController)
-                    }
-                }*/
             }
         }
     }
