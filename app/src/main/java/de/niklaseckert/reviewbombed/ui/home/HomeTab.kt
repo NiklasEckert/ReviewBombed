@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import de.niklaseckert.reviewbombed.ui.home.components.CurrentlyPlayingComponent
-import de.niklaseckert.reviewbombed.ui.home.components.FriendsFinishedComponent
-import de.niklaseckert.reviewbombed.ui.home.components.FriendsPlayingComponent
+import de.niklaseckert.reviewbombed.ui.components.home.CurrentlyPlayingComponent
+import de.niklaseckert.reviewbombed.ui.components.home.FriendsFinishedComponent
+import de.niklaseckert.reviewbombed.ui.components.home.FriendsPlayingComponent
 
 @Composable
 fun HomeTab(

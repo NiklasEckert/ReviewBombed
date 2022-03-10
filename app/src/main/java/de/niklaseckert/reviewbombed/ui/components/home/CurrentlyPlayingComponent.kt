@@ -1,5 +1,6 @@
-package de.niklaseckert.reviewbombed.ui.home.components
+package de.niklaseckert.reviewbombed.ui.components.home
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,21 +15,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_home.presentation.CurrentlyPlayingViewModel
+import de.niklaseckert.reviewbombed.ui.home.components.GameExcerptLazyRow
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
 fun CurrentlyPlayingComponent(
-    navController: NavController
+    navController: NavController,
+    modifier: Modifier = Modifier
 ) {
     val currentlyPlayingViewModel: CurrentlyPlayingViewModel = hiltViewModel()
     val currentlyPlayingState = currentlyPlayingViewModel.state.value
 
-    Text(
-        text = stringResource(id = R.string.currently_playing_headline),
-        fontSize = 26.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(start = 8.dp)
-    )
-    Spacer(modifier = Modifier.height(16.dp))
-    GameExcerptLazyRow(gameExcerptListState = currentlyPlayingState, navController = navController)
-
+    Column(modifier = modifier) {
+        Text(
+            text = stringResource(id = R.string.currently_playing_headline),
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = GeneralUnits.BASE_PADDING)
+        )
+        Spacer(modifier = Modifier.height(height = GeneralUnits.COMPONENT_SPACER_HEIGHT))
+        GameExcerptLazyRow(gameExcerptListState = currentlyPlayingState, navController = navController)
+    }
 }
