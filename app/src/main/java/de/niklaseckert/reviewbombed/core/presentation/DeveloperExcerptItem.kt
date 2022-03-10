@@ -3,6 +3,7 @@ package de.niklaseckert.reviewbombed.core.presentation
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -22,6 +23,7 @@ fun DeveloperExcerptItem(
 //           navController.navigate("developer/{devId}")
            Log.d("developer", "Clicked  " + developerExcerpt.name)
        }
+           .fillMaxWidth()
     ) {
         Text(
             text = developerExcerpt.name
