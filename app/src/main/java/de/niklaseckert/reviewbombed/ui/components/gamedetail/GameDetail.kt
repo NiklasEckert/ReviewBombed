@@ -39,34 +39,19 @@ fun GameDetail(
     ConstraintLayout() {
         val (image, sp, fab, info) = createRefs()
 
-        AsyncImage(
-            model = game.previewImageUrl,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
+        GameDetailPreviewImage(
+            url = game.previewImageUrl,
+            imageModifier = Modifier
                 .constrainAs(image) { top.linkTo(parent.top) }
                 .height(configuration.screenHeightDp.dp / 2)
                 .graphicsLayer {
                     alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
                     translationY = +rememberScrollState.value * 0.7f
-                }
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(100.dp)
-                .fillMaxWidth()
+                },
+            spacerModifier = Modifier
                 .constrainAs(sp) {
                     bottom.linkTo(image.bottom)
                 }
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.White
-                        )
-                    )
-                )
         )
 
         Column(
