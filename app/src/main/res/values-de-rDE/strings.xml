@@ -12,4 +12,5 @@
     <string name="developer_comp_headline">Entwickler</string>
     <string name="list_headline">Liste</string>
     <string name="screenshot_comp_headline">Bildschirmfotos</string>
+    <string name="review_headline">Reviews</string>
 </resources>

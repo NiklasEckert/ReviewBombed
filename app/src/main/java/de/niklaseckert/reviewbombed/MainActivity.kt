@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("home") { HomeTab(navController = navController) }
                         composable("lists") { ListsTab(navController = navController) }
-                        composable("reviews") { ReviewsTab() }
+                        composable("reviews") { ReviewsTab(navController = navController) }
                         composable("profile") { ProfileTab() }
                         composable(
                             route = "game/{gameId}",
