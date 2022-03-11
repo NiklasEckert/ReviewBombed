@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 
 @Composable
 fun ReviewsScreen(
@@ -25,30 +27,30 @@ fun ReviewsScreen(
     val reviewsViewModel: ReviewsViewModel = hiltViewModel()
     val reviewsState = reviewsViewModel.state.value
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 16.dp)
+    Scaffold(
+        topBar = {
+            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_reviews))
+        }
     ) {
-        Text(
-            text = stringResource(id = R.string.review_headline),
-            fontWeight = FontWeight.Bold,
-            fontSize = 36.sp,
+        Column(
             modifier = Modifier
-                .padding(horizontal = 8.dp)
-        )
+                .fillMaxSize()
+                .padding(vertical = 16.dp)
+        ) {
+            LazyColumn() {
+                items(reviewsState.reviewItems.size) { index ->
+                    val review = reviewsState.reviewItems[index]
 
-        LazyColumn() {
-            items(reviewsState.reviewItems.size) { index ->
-                val review = reviewsState.reviewItems[index]
+                    ReviewExcerptItem(review = review, navController = navController)
 
-                ReviewExcerptItem(review = review, navController = navController)
-
-                Divider(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                )
+                    Divider(
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                    )
+                }
             }
         }
     }
+    
+
 }
