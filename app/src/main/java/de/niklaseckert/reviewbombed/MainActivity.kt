@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = ReviewBombedNavigationScreen.Home.route) { HomeScreen(navController = navController) }
                         composable(route = ReviewBombedNavigationScreen.Lists.route) { ListsScreen(navController = navController) }
                         composable(route = ReviewBombedNavigationScreen.Reviews.route) { ReviewsScreen(navController = navController) }
-                        composable(route = ReviewBombedNavigationScreen.Profile.route) { ProfileDetailScreen() }
+                        composable(route = ReviewBombedNavigationScreen.Profile.route) { ProfileDetailScreen(navController = navController) }
                         composable(
                             route = ReviewBombedScreen.GameDetail.route,
                             arguments = listOf(navArgument("gameId") { NavType.LongType })
