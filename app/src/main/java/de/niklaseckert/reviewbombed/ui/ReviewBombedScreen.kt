@@ -13,7 +13,7 @@ sealed class ReviewBombedNavigationScreen(override val route: String, @StringRes
     object Home     : ReviewBombedNavigationScreen(route = "home", R.string.bottom_nav_home, Icons.Filled.Home)
     object Lists    : ReviewBombedNavigationScreen(route = "lists", R.string.bottom_nav_lists, Icons.Filled.List)
     object Reviews  : ReviewBombedNavigationScreen(route = "reviews", R.string.bottom_nav_reviews, Icons.Filled.Star)
-    object Profile  : ReviewBombedNavigationScreen(route = "profile", R.string.bottom_nav_profile, Icons.Filled.Person)
+    object Profile  : ReviewBombedNavigationScreen(route = "profile/{profileId}", R.string.bottom_nav_profile, Icons.Filled.Person)
 }
 
 sealed class ReviewBombedScreen(open val route: String) {
