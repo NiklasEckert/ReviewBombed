@@ -18,22 +18,25 @@ fun ReviewExcerptItem(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
-    Box(
-        modifier = Modifier
-            .clickable { navController.navigate("review/" + review.id) }
-            .padding(all = 8.dp)
-            .fillMaxWidth()
+    Column(
+        modifier = modifier
     ) {
-        Column() {
+        Column(
+            modifier = Modifier
+                .clickable { navController.navigate("review/" + review.id) }
+                .padding(all = 8.dp)
+                .fillMaxWidth()
+        ) {
             Text(
                 text = review.title,
                 fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                fontSize = 24.sp,
             )
             ReviewBombedRatingBar(rating = review.rate)
 
-            Spacer(modifier = Modifier
-                .height(4.dp)
+            Spacer(
+                modifier = Modifier
+                    .height(4.dp)
             )
 
             Row() {
@@ -48,7 +51,10 @@ fun ReviewExcerptItem(
                     var text = review.reviewText
                     if (text.length > 240) {
                         text = text.substring(startIndex = 0, endIndex = 240)
-                        text = text.substring(startIndex = 0, endIndex = text.lastIndexOf(" ")) + "(...)"
+                        text = text.substring(
+                            startIndex = 0,
+                            endIndex = text.lastIndexOf(" ")
+                        ) + "(...)"
                     }
 
                     Text(
