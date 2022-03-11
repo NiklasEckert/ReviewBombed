@@ -1,16 +1,21 @@
-package de.niklaseckert.reviewbombed.ui.lists
+package de.niklaseckert.reviewbombed.ui.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListExcerptViewModel
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
+import de.niklaseckert.reviewbombed.ui.components.general.ScreenHeadline
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
 fun ListsScreen(
@@ -19,17 +24,24 @@ fun ListsScreen(
     val listExcerptViewModel: ListExcerptViewModel = hiltViewModel()
     val listExcerptState = listExcerptViewModel.state.value
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+    Scaffold(
+        topBar = {
+            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_lists))
+        }
     ) {
-        LazyColumn() {
-            items(listExcerptState.listExcerptItems.size) { index ->
-                val listExcerpt = listExcerptState.listExcerptItems[index]
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            LazyColumn() {
+                items(listExcerptState.listExcerptItems.size) { index ->
+                    val listExcerpt = listExcerptState.listExcerptItems[index]
 
-                ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
+                    ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
+                }
             }
         }
     }
+
 }
