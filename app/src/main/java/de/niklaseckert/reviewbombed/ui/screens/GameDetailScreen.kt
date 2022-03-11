@@ -12,7 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.niklaseckert.reviewbombed.feature_game.presentation.GameViewModel
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.GameDetailFloatingActionButton
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.GameDetailPreviewImage
@@ -34,85 +37,92 @@ fun GameDetailScreen(
 
     gameState.gameItem?.let { game ->
 
-        ConstraintLayout(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState)
+        Scaffold(
+            topBar = {
+//                ReviewBombedCustomTopBar(text = game.title)
+            }
         ) {
-            val (image, sp, fab, info, comps) = createRefs()
-
-            GameDetailPreviewImage(
-                url = game.previewImageUrl,
-                imageModifier = Modifier
-                    .constrainAs(image) { top.linkTo(parent.top) }
-                    .height(configuration.screenHeightDp.dp / 2)
-                    .graphicsLayer {
-                        alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
-                        translationY = +rememberScrollState.value * 0.7f
-                    },
-                spacerModifier = Modifier
-                    .constrainAs(sp) {
-                        bottom.linkTo(image.bottom)
-                    }
-            )
-
-            Box(
+            ConstraintLayout(
                 modifier = Modifier
-                    .background(MaterialTheme.colors.background)
-                    .constrainAs(info) {
-                        top.linkTo(image.bottom)
-                    }
+                    .verticalScroll(rememberScrollState)
             ) {
-                Column(
-                    modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
-                ) {
-                    GameDetailHeadline(text = game.title)
-                    LocalDateText(date = game.date)
-                    Text(
-                        text = game.description
-                    )
-                }
-            }
+                val (image, sp, fab, info, comps) = createRefs()
 
-            Box(
-                modifier = Modifier
-                    .background(MaterialTheme.colors.background)
-                    .constrainAs(comps) {
-                        top.linkTo(info.bottom)
+                GameDetailPreviewImage(
+                    url = game.previewImageUrl,
+                    imageModifier = Modifier
+                        .constrainAs(image) { top.linkTo(parent.top) }
+                        .height(configuration.screenHeightDp.dp / 2)
+                        .graphicsLayer {
+                            alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
+                            translationY = +rememberScrollState.value * 0.7f
+                        },
+                    spacerModifier = Modifier
+                        .constrainAs(sp) {
+                            bottom.linkTo(image.bottom)
+                        }
+                )
+
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colors.background)
+                        .constrainAs(info) {
+                            top.linkTo(image.bottom)
+                        }
+                ) {
+                    Column(
+                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+                    ) {
+                        GameDetailHeadline(text = game.title)
+                        LocalDateText(date = game.date)
+                        Text(
+                            text = game.description
+                        )
                     }
-            ) {
-                Column(
-                    modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
-                ) {
-                    Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                    Divider()
-                    ScreenshotExcerptListComponent(
-                        screenshots = game.screenshots,
-                        navController = navController
-                    )
-
-                    Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                    Divider()
-                    PublisherExcerptListComponent(
-                        navController = navController,
-                        publishers = game.publishers
-                    )
-
-                    Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                    DeveloperExcerptListComponent(
-                        navController = navController,
-                        developers = game.developers
-                    )
                 }
 
-            }
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colors.background)
+                        .constrainAs(comps) {
+                            top.linkTo(info.bottom)
+                        }
+                ) {
+                    Column(
+                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+                    ) {
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        Divider()
+                        ScreenshotExcerptListComponent(
+                            screenshots = game.screenshots,
+                            navController = navController
+                        )
 
-            GameDetailFloatingActionButton(
-                modifier = Modifier
-                    .constrainAs(fab) {
-                        centerAround(image.bottom)
-                        absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        Divider()
+                        PublisherExcerptListComponent(
+                            navController = navController,
+                            publishers = game.publishers
+                        )
+
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        DeveloperExcerptListComponent(
+                            navController = navController,
+                            developers = game.developers
+                        )
                     }
-            )
+
+                }
+
+                GameDetailFloatingActionButton(
+                    modifier = Modifier
+                        .constrainAs(fab) {
+                            centerAround(image.bottom)
+                            absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
+                        }
+                )
+            }
         }
+
     }
 }

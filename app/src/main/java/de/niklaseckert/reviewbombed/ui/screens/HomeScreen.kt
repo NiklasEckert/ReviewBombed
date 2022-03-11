@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.home.CurrentlyPlayingComponent
 import de.niklaseckert.reviewbombed.ui.components.home.FriendsFinishedComponent
 import de.niklaseckert.reviewbombed.ui.components.home.FriendsPlayingComponent
@@ -22,7 +23,10 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     
     Scaffold(
-        scaffoldState = scaffoldState
+        scaffoldState = scaffoldState,
+        topBar = {
+            ReviewBombedCustomTopBar()
+        }
     ) {
         Box(
             modifier = Modifier.background(MaterialTheme.colors.background)

@@ -18,6 +18,7 @@ import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
 fun ReviewBombedCustomTopBar(
+    text: String = stringResource(id = R.string.app_name),
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -27,12 +28,12 @@ fun ReviewBombedCustomTopBar(
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(id = R.string.app_name),
+            text = text,
             fontWeight = FontWeight.ExtraBold,
             fontSize = 24.sp,
-            color = contentColorFor(backgroundColor = MaterialTheme.colors.primaryVariant),
             modifier = Modifier
                 .padding(vertical = GeneralUnits.BASE_PADDING)
+                .background(MaterialTheme.colors.primaryVariant)
         )
     }
 }
