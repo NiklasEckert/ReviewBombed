@@ -3,6 +3,7 @@ package de.niklaseckert.reviewbombed.feature_review.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import de.niklaseckert.reviewbombed.core.domain.model.GameExcerpt
+import de.niklaseckert.reviewbombed.feature_profile.domain.model.Profile
 import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import java.time.LocalDate
 
@@ -13,7 +14,8 @@ data class ReviewEntity(
     val reviewDate: LocalDate,
     val rate: Int,
     val reviewText: String,
-    val gameExcerpt: GameExcerpt
+    val gameExcerpt: GameExcerpt,
+    val user: Profile
 ) {
 
     fun toReview(): Review {
@@ -23,7 +25,8 @@ data class ReviewEntity(
             reviewDate = reviewDate,
             rate = rate,
             reviewText = reviewText,
-            gameExcerpt = gameExcerpt
+            gameExcerpt = gameExcerpt,
+            user = user
         )
     }
 }

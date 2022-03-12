@@ -1,6 +1,7 @@
 package de.niklaseckert.reviewbombed.feature_review.domain.model
 
 import de.niklaseckert.reviewbombed.core.domain.model.GameExcerpt
+import de.niklaseckert.reviewbombed.feature_profile.domain.model.Profile
 import java.time.LocalDate
 
 class Review(
@@ -9,6 +10,7 @@ class Review(
     val reviewDate: LocalDate,
     val rate: Int,
     val reviewText: String,
-    val gameExcerpt: GameExcerpt
+    val gameExcerpt: GameExcerpt,
+    val user: Profile
 ) {
 }

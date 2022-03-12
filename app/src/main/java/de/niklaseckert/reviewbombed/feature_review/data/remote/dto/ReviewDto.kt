@@ -1,6 +1,7 @@
 package de.niklaseckert.reviewbombed.feature_review.data.remote.dto
 
 import de.niklaseckert.reviewbombed.core.domain.model.GameExcerpt
+import de.niklaseckert.reviewbombed.feature_profile.domain.model.Profile
 import de.niklaseckert.reviewbombed.feature_review.data.local.entity.ReviewEntity
 import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import java.time.LocalDate
@@ -12,7 +13,8 @@ data class ReviewDto(
     val reviewDate: String,
     val rate: Int,
     val reviewText: String,
-    val game: GameExcerpt
+    val game: GameExcerpt,
+    val user: Profile
 ) {
     fun toReviewEntity(): ReviewEntity {
         return ReviewEntity(
@@ -21,7 +23,8 @@ data class ReviewDto(
             reviewDate = LocalDate.parse(reviewDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
             rate = rate,
             reviewText = reviewText,
-            gameExcerpt = game
+            gameExcerpt = game,
+            user = user
         )
     }
 
@@ -32,7 +35,8 @@ data class ReviewDto(
             reviewDate = LocalDate.parse(reviewDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
             rate = rate,
             reviewText = reviewText,
-            gameExcerpt = game
+            gameExcerpt = game,
+            user = user
         )
     }
 }
