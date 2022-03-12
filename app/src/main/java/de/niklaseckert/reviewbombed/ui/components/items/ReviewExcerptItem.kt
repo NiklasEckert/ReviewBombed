@@ -26,6 +26,7 @@ fun ReviewExcerptItem(
                 .clickable { navController.navigate("review/" + review.id) }
                 .padding(all = 8.dp)
                 .fillMaxWidth()
+                .fillMaxHeight()
         ) {
             Text(
                 text = review.title,

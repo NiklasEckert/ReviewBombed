@@ -1,9 +1,6 @@
 package de.niklaseckert.reviewbombed.ui.components.profile
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -42,12 +39,16 @@ fun ReviewsOfUserComponent(
 
         LazyRow {
             items(reviews.size) { index ->
-                Card() {
+                Card(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                ) {
                     ReviewExcerptItem(
                         review = reviews[index],
                         navController = navController,
                         modifier = Modifier
                             .width(configuration.screenWidthDp.dp - GeneralUnits.DOUBLE_SPACER_WIDTH)
+                            .fillMaxHeight()
                     )
                 }
                 
