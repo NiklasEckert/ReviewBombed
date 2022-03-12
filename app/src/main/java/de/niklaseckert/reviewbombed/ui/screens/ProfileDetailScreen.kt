@@ -22,6 +22,7 @@ import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_profile.presentation.ProfileViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
+import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.components.profile.ListsOfUserComponent
 import de.niklaseckert.reviewbombed.ui.components.profile.ReviewsOfUserComponent
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
@@ -40,6 +41,9 @@ fun ProfileDetailScreen(
         scaffoldState = scaffoldState,
         topBar = {
             ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_profile))
+        },
+        bottomBar = {
+            ReviewBombedBottomNavigation(navController = navController)
         }
     ) {
         Column(

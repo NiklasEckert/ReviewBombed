@@ -21,6 +21,7 @@ sealed class ReviewBombedScreen(open val route: String) {
     object ListDetail       : ReviewBombedScreen(route = "list/{listId}")
     object ReviewDetail     : ReviewBombedScreen(route = "review/{reviewId}")
     object ProfileDetail    : ReviewBombedScreen(route = "profile/{profileId}")
+    object LoginScreen      : ReviewBombedScreen(route = "login")
 }
 
 

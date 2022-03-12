@@ -14,6 +14,7 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListExcerptViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
+import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.components.general.ScreenHeadline
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
@@ -27,6 +28,9 @@ fun ListsScreen(
     Scaffold(
         topBar = {
             ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_lists))
+        },
+        bottomBar = {
+            ReviewBombedBottomNavigation(navController = navController)
         }
     ) {
         Column(

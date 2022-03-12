@@ -18,6 +18,7 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
+import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
@@ -30,6 +31,9 @@ fun ReviewsScreen(
     Scaffold(
         topBar = {
             ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_reviews))
+        },
+        bottomBar = {
+            ReviewBombedBottomNavigation(navController = navController)
         }
     ) {
         Column(

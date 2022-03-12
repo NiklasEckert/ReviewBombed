@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
+import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.components.home.CurrentlyPlayingComponent
 import de.niklaseckert.reviewbombed.ui.components.home.FriendsFinishedComponent
 import de.niklaseckert.reviewbombed.ui.components.home.FriendsPlayingComponent
@@ -26,6 +27,9 @@ fun HomeScreen(
         scaffoldState = scaffoldState,
         topBar = {
             ReviewBombedCustomTopBar()
+        },
+        bottomBar = {
+            ReviewBombedBottomNavigation(navController = navController)
         }
     ) {
         Box(
