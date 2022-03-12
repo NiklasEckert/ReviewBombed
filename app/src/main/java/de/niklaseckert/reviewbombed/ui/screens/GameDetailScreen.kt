@@ -5,17 +5,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.google.accompanist.systemuicontroller.SystemUiController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import de.niklaseckert.reviewbombed.feature_game.presentation.GameViewModel
-import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.GameDetailFloatingActionButton
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.GameDetailPreviewImage
