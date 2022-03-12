@@ -14,8 +14,6 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListExcerptViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
-import de.niklaseckert.reviewbombed.ui.components.general.ScreenHeadline
-import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @Composable
 fun ListsScreen(
@@ -32,7 +30,7 @@ fun ListsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
         ) {
             LazyColumn() {
                 items(listExcerptState.listExcerptItems.size) { index ->
