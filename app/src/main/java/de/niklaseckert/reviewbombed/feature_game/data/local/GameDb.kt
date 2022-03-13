@@ -7,6 +7,12 @@ import de.niklaseckert.reviewbombed.core.data.LocalDateConverter
 import de.niklaseckert.reviewbombed.feature_game.data.local.dao.GameDao
 import de.niklaseckert.reviewbombed.feature_game.data.local.entity.GameEntity
 
+/**
+ * Class which represents the database for Games.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Database(
     entities = [GameEntity::class],
     version = 1
@@ -14,5 +20,6 @@ import de.niklaseckert.reviewbombed.feature_game.data.local.entity.GameEntity
 @TypeConverters(Converters::class, LocalDateConverter::class)
 abstract class GameDb : RoomDatabase() {
 
+    /** Data Access Object to access the Games. */
     abstract val dao: GameDao
 }

@@ -20,22 +20,47 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Module that provides all Singletons that are needed for the Games.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class GameModule {
 
+    /**
+     * Method that provide the Get Game Use Case.
+     *
+     * @param repository contains the Game Repository.
+     * @return the Get Game Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetGameUseCase(repository: GameRepository): GetGame {
         return GetGame(repository)
     }
 
+    /**
+     * Method that provide the Game Repository.
+     *
+     * @param db contains the Game Database.
+     * @param api contains the Game API.
+     * @return the Game Repository.
+     */
     @Provides
     @Singleton
     fun provideGameRepository(db: GameDb, api: GameApi): GameRepository {
         return GameRepositoryImpl(api, db.dao)
     }
 
+    /**
+     * Method that provides the Game Database.
+     *
+     * @param app contains the Application.
+     * @return the Game Database.
+     */
     @Provides
     @Singleton
     fun provideGameDb(app: Application): GameDb {
@@ -49,6 +74,11 @@ class GameModule {
             .build()
     }
 
+    /**
+     * Method that provides the Game API.
+     *
+     * @return the Game API.
+     */
     @Provides
     @Singleton
     fun provideGameApi(): GameApi {

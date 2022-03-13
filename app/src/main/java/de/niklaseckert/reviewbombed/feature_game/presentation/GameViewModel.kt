@@ -17,21 +17,41 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Class which represents the View Model for Games.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @HiltViewModel
 class GameViewModel @Inject constructor(
+
+    /** Contains the Get Game Use Case. */
     private val getGame: GetGame,
+
+    /** Contains all saved states which the View Model can refer to. */
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    /** Represents the Game State. */
     private val _state = mutableStateOf(GameState())
     val state: State<GameState> = _state
 
     init {
+
+        /**
+         * Initialize saved state handle with the current Game id.
+         */
         savedStateHandle.get<String>("gameId")?.let { gameId ->
             onGetGame(gameId.toLong())
         }
     }
 
+    /**
+     * Method to get a specific Game.
+     *
+     * @param id contains the id of a Game.
+     */
     fun onGetGame(id: Long) {
         viewModelScope.launch {
             getGame(id)

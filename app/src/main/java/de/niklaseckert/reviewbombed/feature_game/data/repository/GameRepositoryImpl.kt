@@ -10,10 +10,27 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Repository which contains elements of Games.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 class GameRepositoryImpl(
+
+    /** API for the Games. */
     private val api: GameApi,
+
+    /** Data Access Object for the Games. */
     private val dao: GameDao
 ) : GameRepository {
+
+    /**
+     * Method to get a specific Game.
+     *
+     * @param id contains the id of a Game.
+     * @return a Flow Resource of the Game.
+     */
     override fun getGame(id: Long): Flow<Resource<Game>> = flow {
         emit(Resource.Loading())
 

@@ -1,7 +1,7 @@
 package de.niklaseckert.reviewbombed.core.data.remote
 
 /**
- * Class that holds the url for the API.
+ * Class that holds the base url for the API.
  *
  * @author Niklas Eckert
  * @author Jakob Friedsam
