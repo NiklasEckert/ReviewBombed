@@ -28,7 +28,7 @@ fun ListsOfUserComponent(
 
     Column() {
         Text(
-            text = stringResource(id = R.string.list_headline),
+            text = stringResource(id = R.string.bottom_nav_lists),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )

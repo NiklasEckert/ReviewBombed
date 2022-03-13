@@ -63,7 +63,7 @@ fun LoginScreen(
                 TextField(
                     value = userValue,
                     onValueChange = { userValue = it },
-                    label =  { Text(text = "Username") }
+                    label =  { Text(text = stringResource(id = R.string.login_username)) }
                 )
 
                 Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
@@ -71,7 +71,7 @@ fun LoginScreen(
                 TextField(
                     value = passValue,
                     onValueChange = { passValue = it },
-                    label = { Text(text = "Password") },
+                    label = { Text(text = stringResource(id = R.string.login_password)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     visualTransformation = PasswordVisualTransformation()
                 )

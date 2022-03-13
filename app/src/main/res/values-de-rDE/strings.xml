@@ -13,4 +13,12 @@
     <string name="list_headline">Liste</string>
     <string name="screenshot_comp_headline">Bildschirmfotos</string>
     <string name="review_headline">Reviews</string>
+    <string name="login_username">Benutzername</string>
+    <string name="login_password">Passwort</string>
+    <string name="add_review_cancel">Zurück</string>
+    <string name="add_review_save">Speichern</string>
+    <string name="add_review_rating">Bewertung</string>
+    <string name="add_review_title">Titel</string>
+    <string name="add_review_i_played">Ich spielte</string>
+    <string name="add_review_text">Text</string>
 </resources>

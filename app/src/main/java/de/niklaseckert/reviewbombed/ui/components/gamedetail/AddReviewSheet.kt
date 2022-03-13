@@ -11,11 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
@@ -71,11 +73,11 @@ fun AddReviewSheet(
                     }
                 }
             ) {
-                Text(text = "Cancel")
+                Text(text = stringResource(id = R.string.add_review_cancel))
             }
 
             Text(
-                text = "I played ...",
+                text = stringResource(id = R.string.add_review_i_played) + " ...",
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp
             )
@@ -100,7 +102,7 @@ fun AddReviewSheet(
                     }
                 }
             ) {
-                Text(text = "Save")
+                Text(text = stringResource(id = R.string.add_review_save))
             }
         }
 
@@ -148,7 +150,7 @@ fun AddReviewSheet(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "Rating")
+                Text(text = stringResource(id = R.string.add_review_rating))
                 ReviewBombedRatingBar(rating = (sliderPosition + 1).toInt())
             }
             
@@ -168,7 +170,7 @@ fun AddReviewSheet(
         TextField(
             value = reviewTitle,
             onValueChange = { reviewTitle = it },
-            label = { Text(text = "Title") },
+            label = { Text(text = stringResource(id = R.string.add_review_title)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(GeneralUnits.BASE_PADDING)
@@ -179,7 +181,7 @@ fun AddReviewSheet(
         TextField(
             value = reviewText,
             onValueChange = { reviewText = it },
-            label = { Text(text = "Text") },
+            label = { Text(text = stringResource(id = R.string.add_review_text)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(configuration.screenHeightDp.dp / 3)
