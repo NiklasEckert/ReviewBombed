@@ -1,50 +1,85 @@
 package de.niklaseckert.reviewbombed.feature_login.data.service
 
-import de.niklaseckert.reviewbombed.core.util.Resource
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import de.niklaseckert.reviewbombed.feature_login.data.remote.LoginApi
 import de.niklaseckert.reviewbombed.feature_login.data.remote.dto.UserResponse
-import de.niklaseckert.reviewbombed.feature_login.domain.model.User
 import de.niklaseckert.reviewbombed.feature_login.domain.service.LoginService
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import okhttp3.Credentials
-import retrofit2.HttpException
-import retrofit2.awaitResponse
-import java.io.IOException
+import retrofit2.Response
 
 class LoginServiceImpl(
-    private val api: LoginApi
+    private val api: LoginApi,
+    private val context: Context
 ): LoginService {
 
-    override fun login(username: String, password: String): Flow<Resource<User>> = flow {
-        emit(Resource.Loading())
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-//        val profile = dao.getProfileById(profileId)?.toProfile()
-//        emit(Resource.Loading(profile))
-        /* TODO("LOAD CREDENTIALS FROM DATASTORE") */
-        val creds = Credentials.basic(username = username, password = password)
+    companion object {
+        val ACCOUNT_ID = longPreferencesKey("ACCOUNT_ID")
+        val ACCOUNT = stringPreferencesKey("ACCOUNT")
+    }
 
-        try {
-            val userResponse = api.login(creds).awaitResponse()
-            if (userResponse.code() == 401) {
-                emit(Resource.Error(
-                    message = "Unauthorized"
-                ))
-            } else {
-                emit(Resource.Success(
-                    data = userResponse.body()?.toUser()
-                ))
+    override fun signIn(username: String, password: String): Boolean {
+        val credentials = Credentials.basic(username = username, password = password)
+        val userResponse: Response<UserResponse>
+
+        runBlocking {
+            userResponse = api.signIn(credentials)
+
+            if (userResponse.isSuccessful) {
+                context.dataStore.edit { settings ->
+                    settings[ACCOUNT_ID] = userResponse.body()?.toUser()?.id ?: -1
+                    settings[ACCOUNT] = credentials
+                }
             }
-        } catch (e: HttpException) {
-            emit(Resource.Error(
-                message = "Oops, something went wrong!",
-                data = null
-            ))
-        } catch (e: IOException) {
-            emit(Resource.Error(
-                message = "Couldn't reach server, check your internet connection.",
-                data = null
-            ))
         }
+        if (!userResponse.isSuccessful) {
+            return false
+        }
+        return true
+    }
+
+    override fun automaticSignIn(): Boolean {
+        val credentials: String
+        val userResponse: Response<UserResponse>
+
+        runBlocking {
+            credentials = context.dataStore.data.map { settings ->
+                settings[ACCOUNT] ?: ""
+            }.first()
+
+            userResponse = api.signIn(credentials)
+
+            if (userResponse.isSuccessful) {
+                context.dataStore.edit { settings ->
+                    settings[ACCOUNT_ID] = userResponse.body()?.toUser()?.id ?: -1
+                    settings[ACCOUNT] = credentials
+                }
+            }
+        }
+
+        if (!userResponse.isSuccessful) {
+            return false
+        }
+        return true
+    }
+
+    override fun signOut(): Boolean {
+        runBlocking {
+            context.dataStore.edit { settings ->
+                settings[ACCOUNT_ID] = -1
+                settings[ACCOUNT] = ""
+            }
+        }
+        return true
     }
 }

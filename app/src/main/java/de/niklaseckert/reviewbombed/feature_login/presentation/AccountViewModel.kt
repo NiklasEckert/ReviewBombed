@@ -1,63 +1,50 @@
 package de.niklaseckert.reviewbombed.feature_login.presentation
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import de.niklaseckert.reviewbombed.core.util.Resource
-import de.niklaseckert.reviewbombed.feature_login.domain.use_case.PostLogin
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import de.niklaseckert.reviewbombed.feature_login.domain.use_case.AutomaticSignIn
+import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignIn
+import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignOut
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+
+val AccountState = compositionLocalOf<AccountViewModel> { error("User State Context Not Found!") }
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private val postLogin: PostLogin,
-    savedStateHandle: SavedStateHandle
+    private val signIn: SignIn,
+    private val automaticSignIn: AutomaticSignIn,
+    private val signOut: SignOut
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(AccountState())
-    val state: State<AccountState> = _state
+    var isLoggedIn by mutableStateOf(false)
+    var isBusy by mutableStateOf(false)
 
     init {
-//        onGetLogin()
+        runBlocking {
+            automaticSignInFun()
+        }
     }
 
-    fun onGetLogin(
-        username: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onError: () -> Unit
-    ) {
-        viewModelScope.launch {
-            postLogin(username, password)
-                .onEach { result ->
-                    when(result) {
-                        is Resource.Success -> {
-                            _state.value = state.value.copy(
-                                userItem = result.data,
-                                isLoading = false
-                            )
-                            onSuccess()
-                        }
-                        is Resource.Error -> {
-                            _state.value = state.value.copy(
-                                userItem = result.data,
-                                isLoading = false
-                            )
-                            onError()
-                        }
-                        is Resource.Loading -> {
-                            _state.value = state.value.copy(
-                                userItem = result.data,
-                                isLoading = true
-                            )
-                        }
-                    }
-                }.launchIn(this)
-        }
+    fun signInFun(username: String, password: String) {
+        isBusy = true
+        isLoggedIn = signIn(username = username, password = password)
+        isBusy = false
+    }
+
+    fun automaticSignInFun() {
+        isBusy = true
+        isLoggedIn = automaticSignIn()
+        isBusy = false
+    }
+
+    fun signOutFun() {
+        isBusy = true
+        isLoggedIn = !signOut()
+        isBusy = false
     }
 }

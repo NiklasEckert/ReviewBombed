@@ -3,10 +3,7 @@ package de.niklaseckert.reviewbombed.ui.screens
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,19 +16,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountViewModel
 import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.components.general.ScreenHeadline
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
-    accountViewModel: AccountViewModel = hiltViewModel(),
-    navController: NavController,
     localFocusManager: FocusManager = LocalFocusManager.current
 ) {
     var userValue by remember { mutableStateOf("") }
     var passValue by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+    val vm = AccountState.current
 
     Scaffold(
         modifier = Modifier
@@ -48,52 +47,49 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ScreenHeadline(
-                text = stringResource(id = R.string.app_name)
-            )
+            if (vm.isBusy) {
+                CircularProgressIndicator()
+            } else {
+                ScreenHeadline(
+                    text = stringResource(id = R.string.app_name)
+                )
 
-            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
 
-            ScreenHeadline(text = "LOGIN")
+                ScreenHeadline(text = "LOGIN")
 
-            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
 
-            TextField(
-                value = userValue,
-                onValueChange = { userValue = it },
-                label =  { Text(text = "Username") }
-            )
+                TextField(
+                    value = userValue,
+                    onValueChange = { userValue = it },
+                    label =  { Text(text = "Username") }
+                )
 
-            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
 
-            TextField(
-                value = passValue,
-                onValueChange = { passValue = it },
-                label = { Text(text = "Password") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = PasswordVisualTransformation()
-            )
+                TextField(
+                    value = passValue,
+                    onValueChange = { passValue = it },
+                    label = { Text(text = "Password") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    visualTransformation = PasswordVisualTransformation()
+                )
 
-            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-            
-            Button(
-                onClick = {
-                    accountViewModel.onGetLogin(
-                        username = userValue,
-                        password = passValue,
-                        onSuccess = {
-                            navController.navigate(ReviewBombedNavigationScreen.Home.route)
-                        },
-                        onError = {
-                            userValue = ""
-                            passValue = ""
-                            localFocusManager.clearFocus()
+                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            vm.signInFun(userValue, passValue)
                         }
-                    )
+                    }
+                ) {
+                    Text(text = "Login")
                 }
-            ) {
-                Text(text = "Login")
             }
+
+
 
         }
     }
