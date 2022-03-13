@@ -12,6 +12,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.feature_game.presentation.GameViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.AddReviewSheet
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.GameDetailFloatingActionButton

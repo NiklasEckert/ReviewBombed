@@ -1,8 +1,9 @@
 package de.niklaseckert.reviewbombed.feature_review.data.remote
 
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
-import retrofit2.http.GET
-import retrofit2.http.Path
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
+import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
+import retrofit2.http.*
 
 interface ReviewApi {
 
@@ -11,4 +12,7 @@ interface ReviewApi {
 
     @GET("reviews/{id}")
     suspend fun getReview(@Path("id") id: Long): ReviewDto
+
+    @POST("reviews")
+    suspend fun postReview(@Body review: ReviewPostDto, @Header("gameId") gameId: Long): ReviewDto
 }

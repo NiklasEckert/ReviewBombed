@@ -6,7 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
+import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
+import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReviews
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -14,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReviewsViewModel @Inject constructor(
-    private val getReviews: GetReviews
+    private val getReviews: GetReviews,
+    private val postReview: PostReview
 ) : ViewModel() {
 
     private val _state = mutableStateOf(ReviewsState())
@@ -49,6 +55,13 @@ class ReviewsViewModel @Inject constructor(
                     }
                 }
             }.launchIn(this)
+        }
+    }
+
+    fun onPostReview(review: ReviewPostDto, game: Game) {
+        viewModelScope.launch {
+            postReview(review = review, game = game)
+//            onGetReviews()
         }
     }
 }

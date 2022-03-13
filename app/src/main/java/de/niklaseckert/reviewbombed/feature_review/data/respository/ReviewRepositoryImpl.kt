@@ -1,12 +1,16 @@
 package de.niklaseckert.reviewbombed.feature_review.data.respository
 
 import de.niklaseckert.reviewbombed.core.util.Resource
+import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
 import de.niklaseckert.reviewbombed.feature_review.data.local.dao.ReviewDao
 import de.niklaseckert.reviewbombed.feature_review.data.remote.ReviewApi
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
 import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import de.niklaseckert.reviewbombed.feature_review.domain.repository.ReviewRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -64,5 +68,11 @@ class ReviewRepositoryImpl(
 
         val newReview = dao.getReviewById(reviewId)?.toReview()
         emit(Resource.Success(newReview))
+    }
+
+    override fun postReview(review: ReviewPostDto, game: Game) {
+        runBlocking {
+            api.postReview(review = review, gameId = game.id)
+        }
     }
 }

@@ -11,6 +11,8 @@ import dagger.hilt.components.SingletonComponent
 import de.niklaseckert.reviewbombed.core.data.LocalDateConverter
 import de.niklaseckert.reviewbombed.core.data.remote.ReviewBombedApi
 import de.niklaseckert.reviewbombed.core.data.util.GsonParser
+import de.niklaseckert.reviewbombed.core.util.BasicAuthInterceptor
+import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_review.data.local.ReviewDb
 import de.niklaseckert.reviewbombed.feature_review.data.local.ReviewTypeConverter
 import de.niklaseckert.reviewbombed.feature_review.data.remote.ReviewApi
@@ -18,6 +20,8 @@ import de.niklaseckert.reviewbombed.feature_review.data.respository.ReviewReposi
 import de.niklaseckert.reviewbombed.feature_review.domain.repository.ReviewRepository
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReview
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReviews
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -36,6 +40,12 @@ class ReviewModule {
     @Singleton
     fun provideGetReviews(repository: ReviewRepository): GetReviews {
         return GetReviews(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePostReview(repository: ReviewRepository): PostReview {
+        return PostReview(repository)
     }
 
     @Provides
@@ -59,9 +69,14 @@ class ReviewModule {
 
     @Provides
     @Singleton
-    fun provideReviewApi(): ReviewApi {
+    fun provideReviewApi(saveAccount: SaveAccount): ReviewApi {
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(BasicAuthInterceptor(saveAccount))
+            .build()
+
         return Retrofit.Builder()
             .baseUrl(ReviewBombedApi.BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ReviewApi::class.java)

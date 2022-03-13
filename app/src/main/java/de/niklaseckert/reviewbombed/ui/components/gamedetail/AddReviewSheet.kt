@@ -14,19 +14,28 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
+import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
 import de.niklaseckert.reviewbombed.ui.components.general.GameDetailHeadline
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddReviewSheet(
     game: Game,
-    sheetState: ModalBottomSheetState
+    sheetState: ModalBottomSheetState,
+    reviewsViewModel: ReviewsViewModel = hiltViewModel(),
 ) {
 
     var reviewTitle by remember { mutableStateOf("") }
@@ -72,7 +81,24 @@ fun AddReviewSheet(
             )
 
             Button(
-                onClick = { /*TODO*/ }
+                onClick = {
+                    scope.launch {
+                        reviewsViewModel.onPostReview(
+                            review = ReviewPostDto(
+                                id = -1,
+                                title = reviewTitle,
+                                reviewDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                rate = sliderPosition.toInt(),
+                                reviewText = reviewText
+                            ),
+                            game = game
+                        )
+                        sheetState.hide()
+                        reviewText = ""
+                        reviewTitle = ""
+                        sliderPosition = 0f
+                    }
+                }
             ) {
                 Text(text = "Save")
             }
