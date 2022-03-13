@@ -2,6 +2,7 @@ package de.niklaseckert.reviewbombed.ui.components.items
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,6 +12,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun ReviewExcerptItem(
@@ -33,7 +35,29 @@ fun ReviewExcerptItem(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             )
-            ReviewBombedRatingBar(rating = review.rate)
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                ReviewBombedRatingBar(rating = review.rate)
+
+                Text(
+                    text = review.user.name
+                )
+
+                Text(
+                    text = review.reviewDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            Spacer(
+                modifier = Modifier
+                    .height(4.dp)
+            )
+
+            Divider()
 
             Spacer(
                 modifier = Modifier

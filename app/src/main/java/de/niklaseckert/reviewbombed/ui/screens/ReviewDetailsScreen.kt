@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
@@ -48,8 +49,15 @@ fun ReviewDetailsScreen(
                     }
 
                     Spacer(modifier = Modifier.height(8.dp))
+
+                    AsyncImage(
+                        model = review.user.profileImageUrl,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp)
+                    )
+
                     Text(
-                        text = "USERNAME"
+                        text = review.user.name
                     )
                 }
 
@@ -60,6 +68,7 @@ fun ReviewDetailsScreen(
                     GameExcerptItem(gameExcerpt = review.gameExcerpt, navController = navController)
                 }
             }
+
 
             Spacer(modifier = Modifier.height(8.dp))
 

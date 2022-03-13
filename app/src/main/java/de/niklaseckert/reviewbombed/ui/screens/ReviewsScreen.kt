@@ -1,9 +1,6 @@
 package de.niklaseckert.reviewbombed.ui.screens
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -39,7 +36,7 @@ fun ReviewsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical = 16.dp)
+                //.padding(vertical = 16.dp)
         ) {
             LazyColumn() {
                 items(reviewsState.reviewItems.size) { index ->
@@ -49,6 +46,7 @@ fun ReviewsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(GeneralUnits.BASE_PADDING)
+                            //.height(256.dp)
                     ) {
                         ReviewExcerptItem(
                             review = review,
