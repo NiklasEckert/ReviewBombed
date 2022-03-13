@@ -1,5 +1,6 @@
 package de.niklaseckert.reviewbombed.feature_profile.data.repository
 
+import android.util.Log
 import de.niklaseckert.reviewbombed.core.util.Resource
 import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_profile.data.local.dao.ProfileDao
@@ -32,15 +33,17 @@ class ProfileRepositoryImpl(
         emit(Resource.Loading(profile))
 
         try {
-            val remoteProfileResponse = api.getOwnProfile(profileId)
-            val remoteProfile = remoteProfileResponse.body()
-            if (remoteProfileResponse.isSuccessful) {
-                remoteProfile?.let {
-                    dao.deleteProfiles(listOf(remoteProfile).map { it.id })
-                    dao.insertProfile(listOf(remoteProfile).map { it.toProfileEntity() })
-                }
-            }
-
+//            val remoteProfileResponse = api.getOwnProfile(profileId)
+//            val remoteProfile = remoteProfileResponse.body()
+//            if (remoteProfileResponse.isSuccessful) {
+//                remoteProfile?.let {
+//                    dao.deleteProfiles(listOf(remoteProfile).map { it.id })
+//                    dao.insertProfile(listOf(remoteProfile).map { it.toProfileEntity() })
+//                }
+//            }
+            val remoteProfile = api.getProfile(profileId)
+            dao.deleteProfiles(listOf(remoteProfile).map { it.id })
+            dao.insertProfile(listOf(remoteProfile).map { it.toProfileEntity() })
         } catch (e: HttpException) {
             emit(Resource.Error(
                 message = "Oops, something went wrong!",
