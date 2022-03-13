@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.data.remote.LoginApi
 import de.niklaseckert.reviewbombed.feature_login.data.remote.dto.UserResponse
 import de.niklaseckert.reviewbombed.feature_login.domain.service.LoginService
@@ -18,15 +19,8 @@ import retrofit2.Response
 
 class LoginServiceImpl(
     private val api: LoginApi,
-    private val context: Context
+    private val saveAccount: SaveAccount
 ): LoginService {
-
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
-    companion object {
-        val ACCOUNT_ID = longPreferencesKey("ACCOUNT_ID")
-        val ACCOUNT = stringPreferencesKey("ACCOUNT")
-    }
 
     override fun signIn(username: String, password: String): Boolean {
         val credentials = Credentials.basic(username = username, password = password)
@@ -36,10 +30,8 @@ class LoginServiceImpl(
             userResponse = api.signIn(credentials)
 
             if (userResponse.isSuccessful) {
-                context.dataStore.edit { settings ->
-                    settings[ACCOUNT_ID] = userResponse.body()?.toUser()?.id ?: -1
-                    settings[ACCOUNT] = credentials
-                }
+                saveAccount.setAccountId(userResponse.body()?.toUser()?.id ?: -1)
+                saveAccount.setAccountCredentials(credentials = credentials)
             }
         }
         if (!userResponse.isSuccessful) {
@@ -53,17 +45,13 @@ class LoginServiceImpl(
         val userResponse: Response<UserResponse>
 
         runBlocking {
-            credentials = context.dataStore.data.map { settings ->
-                settings[ACCOUNT] ?: ""
-            }.first()
+            credentials = saveAccount.getAccountCredentials()
 
             userResponse = api.signIn(credentials)
 
             if (userResponse.isSuccessful) {
-                context.dataStore.edit { settings ->
-                    settings[ACCOUNT_ID] = userResponse.body()?.toUser()?.id ?: -1
-                    settings[ACCOUNT] = credentials
-                }
+                saveAccount.setAccountId(userResponse.body()?.toUser()?.id ?: -1)
+                saveAccount.setAccountCredentials(credentials = credentials)
             }
         }
 
@@ -75,10 +63,8 @@ class LoginServiceImpl(
 
     override fun signOut(): Boolean {
         runBlocking {
-            context.dataStore.edit { settings ->
-                settings[ACCOUNT_ID] = -1
-                settings[ACCOUNT] = ""
-            }
+            saveAccount.setAccountId(-1)
+            saveAccount.setAccountCredentials(credentials = "")
         }
         return true
     }

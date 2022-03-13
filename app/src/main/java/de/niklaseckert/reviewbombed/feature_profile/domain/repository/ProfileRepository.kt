@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProfileRepository {
 
+    fun getOwnProfile(): Flow<Resource<Profile>>
     fun getProfile(profileId: Long): Flow<Resource<Profile>>
     fun getProfiles(profileIds: List<Long>): Flow<Resource<List<Profile>>>
 }

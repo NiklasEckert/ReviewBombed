@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import de.niklaseckert.reviewbombed.core.data.remote.ReviewBombedApi
+import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.data.remote.LoginApi
 import de.niklaseckert.reviewbombed.feature_login.data.service.LoginServiceImpl
 import de.niklaseckert.reviewbombed.feature_login.domain.service.LoginService
@@ -39,8 +40,14 @@ class AccountModule {
 
     @Provides
     @Singleton
-    fun provideAccountService(api: LoginApi, app: Application): LoginService {
-        return LoginServiceImpl(api, app.applicationContext)
+    fun provideSaveAccount(app: Application): SaveAccount {
+        return SaveAccount(app.applicationContext)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountService(api: LoginApi, saveAccount: SaveAccount): LoginService {
+        return LoginServiceImpl(api, saveAccount)
     }
 
     @Provides
