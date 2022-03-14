@@ -6,37 +6,46 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
-import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetCurrentlyPlaying
 import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetFriendsFinished
-import de.niklaseckert.reviewbombed.feature_home.domain.use_case.GetFriendsPlaying
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Class which represents the View Model for finished Games.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @HiltViewModel
 class FriendsFinishedViewModel @Inject constructor(
+
+    /** Contains the Get Friends Finished Use Case. */
     private val getFriendsFinished: GetFriendsFinished
 ): ViewModel() {
 
+    /** Represents the State. */
     private val _state = mutableStateOf(GameExcerptListState())
     val state: State<GameExcerptListState> = _state
 
+    /** Represents the event flow. */
     private val _eventFlow = MutableSharedFlow<UIEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
-
-    private var searchJob: Job? = null
 
     init {
+
+        /**
+         * Initialize with the Games that friends finished.
+         */
         loadFriendsFinished()
     }
 
+    /**
+     * Method to get all Games that friends finished.
+     */
     fun loadFriendsFinished() {
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch {
+        viewModelScope.launch {
             getFriendsFinished()
                 .onEach { result ->
                     when(result) {
@@ -67,6 +76,9 @@ class FriendsFinishedViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Sealed class to show a Snackbar.
+     */
     sealed class UIEvent {
         data class ShowSnackbar(val message: String): UIEvent()
     }
