@@ -10,7 +10,7 @@ class PostReview(
     private val repository: ReviewRepository
 ) {
 
-    operator fun invoke(review: ReviewPostDto, game: Game) {
-        repository.postReview(review = review, game = game)
+    operator fun invoke(review: ReviewPostDto, gameId: Long) {
+        repository.postReview(review = review, gameId = gameId)
     }
 }

@@ -12,5 +12,5 @@ interface ReviewRepository {
     fun getReviews(): Flow<Resource<List<Review>>>
     fun getReview(reviewId: Long): Flow<Resource<Review>>
 
-    fun postReview(review: ReviewPostDto, game: Game)
+    fun postReview(review: ReviewPostDto, gameId: Long)
 }

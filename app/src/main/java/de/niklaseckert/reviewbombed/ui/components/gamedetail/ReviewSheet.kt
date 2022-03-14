@@ -93,7 +93,7 @@ fun AddReviewSheet(
                                 rate = sliderPosition.toInt() + 1,
                                 reviewText = reviewText
                             ),
-                            game = game
+                            gameId = game.id
                         )
                         sheetState.hide()
                         reviewText = ""
