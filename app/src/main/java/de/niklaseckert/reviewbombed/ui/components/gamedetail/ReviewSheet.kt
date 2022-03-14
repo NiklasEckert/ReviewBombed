@@ -1,7 +1,6 @@
 package de.niklaseckert.reviewbombed.ui.components.gamedetail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -19,19 +18,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
-import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
-import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
-import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
 import de.niklaseckert.reviewbombed.ui.components.general.GameDetailHeadline
-import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable which displays the add review screen.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddReviewSheet(

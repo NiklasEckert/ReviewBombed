@@ -14,6 +14,12 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable which calls the Publisher Excerpt List.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun PublisherExcerptListComponent(
     navController: NavController,

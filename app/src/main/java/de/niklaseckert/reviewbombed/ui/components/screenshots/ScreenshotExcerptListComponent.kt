@@ -15,6 +15,12 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable which calls the Screenshot Excerpt List.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ScreenshotExcerptListComponent(
     screenshots: List<ScreenshotExcerpt>,

@@ -10,6 +10,12 @@ import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_home.presentation.GameExcerptListState
 
+/**
+ * Composable which displays a list of Game Excerpts.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun GameExcerptLazyRow(
     gameExcerptListState: GameExcerptListState,

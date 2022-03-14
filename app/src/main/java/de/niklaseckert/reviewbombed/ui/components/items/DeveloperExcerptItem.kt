@@ -13,6 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
 
+/**
+ * Composable to display a Developer Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun DeveloperExcerptItem(
     developerExcerpt: DeveloperExcerpt,

@@ -13,6 +13,12 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 
+/**
+ * Composable which displays the bottom navigation.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewBombedBottomNavigation(
     navController: NavController

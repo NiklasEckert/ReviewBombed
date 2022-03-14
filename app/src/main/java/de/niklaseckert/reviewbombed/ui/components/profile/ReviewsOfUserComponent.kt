@@ -17,6 +17,12 @@ import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display all Reviews of an User.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewsOfUserComponent(
     navController: NavController,

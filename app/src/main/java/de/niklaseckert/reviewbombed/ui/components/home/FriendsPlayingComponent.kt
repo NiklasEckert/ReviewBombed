@@ -17,6 +17,12 @@ import de.niklaseckert.reviewbombed.feature_home.presentation.FriendsPlayingView
 import de.niklaseckert.reviewbombed.ui.components.general.GameExcerptLazyRow
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display all Games that friends are playing.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun FriendsPlayingComponent(
     navController: NavController,

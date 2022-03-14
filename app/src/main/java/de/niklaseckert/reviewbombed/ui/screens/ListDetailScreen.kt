@@ -1,27 +1,28 @@
 package de.niklaseckert.reviewbombed.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.presentation.TopBarState
-import de.niklaseckert.reviewbombed.core.presentation.TopBarViewModel
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListViewModel
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display the details of a List.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListDetailScreen(

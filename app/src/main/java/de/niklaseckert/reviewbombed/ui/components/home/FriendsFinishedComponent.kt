@@ -17,6 +17,12 @@ import de.niklaseckert.reviewbombed.feature_home.presentation.FriendsFinishedVie
 import de.niklaseckert.reviewbombed.ui.components.general.GameExcerptLazyRow
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display all Games that friends finished.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun FriendsFinishedComponent(
     navController: NavController,

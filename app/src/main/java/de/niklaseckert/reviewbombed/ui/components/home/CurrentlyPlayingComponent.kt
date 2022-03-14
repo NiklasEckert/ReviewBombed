@@ -17,6 +17,12 @@ import de.niklaseckert.reviewbombed.feature_home.presentation.CurrentlyPlayingVi
 import de.niklaseckert.reviewbombed.ui.components.general.GameExcerptLazyRow
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display every Game that is currently played.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun CurrentlyPlayingComponent(
     navController: NavController,

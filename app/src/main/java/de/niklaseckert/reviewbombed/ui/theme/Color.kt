@@ -2,6 +2,13 @@ package de.niklaseckert.reviewbombed.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+/**
+ * File which represents all colors used in this app.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
+
 val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)

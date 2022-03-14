@@ -8,6 +8,12 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.core.domain.model.ScreenshotExcerpt
 
+/**
+ * Composable to display a Screenshot Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ScreenshotExcerptItem(
     screenshotExcerpt: ScreenshotExcerpt,

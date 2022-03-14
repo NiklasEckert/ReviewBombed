@@ -28,6 +28,12 @@ import de.niklaseckert.reviewbombed.ui.components.profile.ListsOfUserComponent
 import de.niklaseckert.reviewbombed.ui.components.profile.ReviewsOfUserComponent
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display the details of a Profile.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ProfileDetailScreen(
     navController: NavController

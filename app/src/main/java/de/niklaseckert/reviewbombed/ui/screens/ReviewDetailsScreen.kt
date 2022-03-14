@@ -18,6 +18,12 @@ import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable to display the details of a Review.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewDetailsScreen(
     reviewViewModel: ReviewViewModel = hiltViewModel(),

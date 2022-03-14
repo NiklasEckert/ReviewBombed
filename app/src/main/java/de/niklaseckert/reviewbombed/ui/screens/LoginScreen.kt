@@ -13,16 +13,18 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
-import de.niklaseckert.reviewbombed.feature_login.presentation.AccountViewModel
-import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.components.general.ScreenHeadline
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
 
+/**
+ * Composable to display the login screen.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun LoginScreen(
     localFocusManager: FocusManager = LocalFocusManager.current

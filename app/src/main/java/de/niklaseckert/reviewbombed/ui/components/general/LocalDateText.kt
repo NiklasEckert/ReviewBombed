@@ -8,6 +8,12 @@ import androidx.compose.ui.unit.sp
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable which displays a Local Date.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun LocalDateText(
     date: LocalDate,

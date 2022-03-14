@@ -13,6 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.PublisherExcerpt
 
+/**
+ * Composable to display a Publisher Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun PublisherExcerptItem(
     publisherExcerpt: PublisherExcerpt,

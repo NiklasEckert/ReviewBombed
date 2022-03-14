@@ -24,6 +24,12 @@ import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
 
+/**
+ * Composable to display the top bar.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewBombedCustomTopBar(
     modifier: Modifier = Modifier

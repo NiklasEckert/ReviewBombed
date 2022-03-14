@@ -16,6 +16,12 @@ import de.niklaseckert.reviewbombed.core.domain.model.ListExcerpt
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display all Lists of an User.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ListsOfUserComponent(
     navController: NavController,
