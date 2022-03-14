@@ -12,18 +12,34 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Class which represents the View Model for List Excerpts.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @HiltViewModel
 class ListExcerptViewModel @Inject constructor(
+
+    /** Contains the Get List Excerpts Use Case. */
     private val getListExcerpts: GetListExcerpts
 ) : ViewModel() {
 
+    /** Represents the List Excerpt State. */
     private val _state = mutableStateOf(ListExcerptState())
     val state: State<ListExcerptState> = _state
 
     init {
+
+        /**
+         * Initialize with the List Excerpts.
+         */
         onGetListExcerpts()
     }
 
+    /**
+     * Method to get all List Excerpts.
+     */
     fun onGetListExcerpts() {
         viewModelScope.launch {
             getListExcerpts()
