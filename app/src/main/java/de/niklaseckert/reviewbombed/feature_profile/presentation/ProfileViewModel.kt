@@ -14,23 +14,37 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Class which represents the View Model for Profiles.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
+
+    /** Contains the Get Profile Use Case. */
     private val getProfile: GetProfile,
+
+    /** Contains the Get Own Profile Use Case. */
     private val getOwnProfile: GetOwnProfile,
-    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    /** Represents the Profile State. */
     private val _state = mutableStateOf(ProfileState())
     val state: State<ProfileState> = _state
 
     init {
-//        savedStateHandle.get<String>("profileId")?.let { profileId ->
-//            onGetProfile(profileId.toLong())
-//        }
+
+        /**
+         * Initialize with the own Profile.
+         */
         onGetOwnProfile()
     }
 
+    /**
+     * Method to get the own Profile.
+     */
     fun onGetOwnProfile() {
         viewModelScope.launch {
             getOwnProfile()
@@ -59,6 +73,11 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Method to get a specific Profile.
+     *
+     * @param id contains the id of a Game.
+     */
     fun onGetProfile(id: Long) {
         viewModelScope.launch {
             getProfile(id)

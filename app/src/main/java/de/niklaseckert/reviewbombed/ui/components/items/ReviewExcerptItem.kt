@@ -14,6 +14,12 @@ import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable to display a Reveiew Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewExcerptItem(
     review: Review,

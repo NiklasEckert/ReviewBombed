@@ -13,6 +13,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
+/**
+ * Composable which displays the preview image of a Game.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun GameDetailPreviewImage(
     url: String,

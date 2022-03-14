@@ -11,11 +11,26 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Repository which contains elements of the Home screen.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 class HomeRepositoryImpl(
+
+    /** API for the Home screen. */
     private val api: HomeApi,
+
+    /** Data Access Object for the Home screen. */
     private val dao: HomeDao
 ) : HomeRepository {
 
+    /**
+     * Method to get all games that are currently played.
+     *
+     * @return a Flow Resource of a list which contains the Game Excerpts that are currently played.
+     */
     override fun getCurrentlyPlaying(): Flow<Resource<List<GameExcerpt>>> = flow {
         emit(Resource.Loading())
 
@@ -47,6 +62,11 @@ class HomeRepositoryImpl(
         emit(Resource.Success(newCurrentlyPlaying))
     }
 
+    /**
+     * Method to get all Games that friends are currently playing.
+     *
+     * @return a Flow Resource of a list which contains the Game Excerpts that friends are currently playing.
+     */
     override fun getFriendsPlaying(): Flow<Resource<List<GameExcerpt>>> = flow {
         emit(Resource.Loading())
 
@@ -78,6 +98,12 @@ class HomeRepositoryImpl(
         emit(Resource.Success(newFriendsPlaying))
     }
 
+
+    /**
+     * Method to get all Games that friends recently finished.
+     *
+     * @return a Flow Resource of a list which contains the Game Excerpts that friends recently finished.
+     */
     override fun getFriendsFinished(): Flow<Resource<List<GameExcerpt>>> = flow {
         emit(Resource.Loading())
 

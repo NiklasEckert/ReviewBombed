@@ -11,11 +11,26 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Repository which contains the Lists.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 class ListRepositoryImpl(
+
+    /** API for the Lists. */
     private val api: ListApi,
+
+    /** Data Access Object for the Lists. */
     private val dao: ListDao
 ) : ListRepository {
 
+    /**
+     * Method to get all List Excerpts.
+     *
+     * @return a Flow Resource of a List which contains the List Excerpts.
+     */
     override fun getListExcerpts(): Flow<Resource<List<ListExcerpt>>> = flow {
         emit(Resource.Loading())
 
@@ -42,6 +57,12 @@ class ListRepositoryImpl(
         emit(Resource.Success(newLists))
     }
 
+    /**
+     * Method to get a specific List.
+     *
+     * @param id contains the id of a List.
+     * @return a Flow Resource of the List Model.
+     */
     override fun getList(id: Long): Flow<Resource<ListModel>> = flow {
         emit(Resource.Loading())
 

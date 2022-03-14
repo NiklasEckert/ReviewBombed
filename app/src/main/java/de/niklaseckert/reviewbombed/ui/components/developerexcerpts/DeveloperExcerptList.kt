@@ -7,6 +7,12 @@ import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
 import de.niklaseckert.reviewbombed.ui.components.items.DeveloperExcerptItem
 
+/**
+ * Composable to display a list of Developer Excerpts.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun DevelopersExcerptList(
     developers: List<DeveloperExcerpt>,

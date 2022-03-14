@@ -6,7 +6,7 @@ import de.niklaseckert.reviewbombed.feature_game.domain.repository.GameRepositor
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Use case to get on specific Game.
+ * Use Case to get on specific Game.
  *
  * @author Niklas Eckert
  * @author Jakob Friedsam

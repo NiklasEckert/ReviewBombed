@@ -14,6 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
+/**
+ * Composable to display a List Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ListExcerptItem(
     listExcerpt: ListExcerpt,

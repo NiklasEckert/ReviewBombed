@@ -9,6 +9,12 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+/**
+ * File which represents the color mapping.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 private val DarkColorPalette = darkColors(
     primary = Orange400,
     primaryVariant = BlueGray900,
@@ -23,6 +29,9 @@ private val DarkColorPalette = darkColors(
 //    secondary = Teal200
 //)
 
+/**
+ * Composable to set the app always in dark mode.
+ */
 @Composable
 fun ReviewBombedTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     val colors = if (darkTheme) {

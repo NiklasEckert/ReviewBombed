@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,6 +19,12 @@ import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable to display all Reviews.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun ReviewsScreen(
     navController: NavController

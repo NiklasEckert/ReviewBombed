@@ -14,6 +14,12 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.core.domain.model.GameExcerpt
 
+/**
+ * Composable to display a Game Excerpt.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun GameExcerptItem(
     gameExcerpt: GameExcerpt,

@@ -7,6 +7,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
+/**
+ * Composables for all headlines used in this app.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
+
 @Composable
 fun GameDetailHeadline(
     text: String,

@@ -7,6 +7,12 @@ import de.niklaseckert.reviewbombed.core.data.local.Converters
 import de.niklaseckert.reviewbombed.core.data.local.entity.GameExcerptEntity
 import de.niklaseckert.reviewbombed.feature_home.data.local.dao.HomeDao
 
+/**
+ * Class which represents the database for the home screen.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Database(
     entities = [GameExcerptEntity::class],
     version = 1
@@ -14,5 +20,6 @@ import de.niklaseckert.reviewbombed.feature_home.data.local.dao.HomeDao
 @TypeConverters(Converters::class)
 abstract class HomeDb : RoomDatabase() {
 
+    /** Data Access Object to access the home items. */
     abstract val homeDao: HomeDao
 }

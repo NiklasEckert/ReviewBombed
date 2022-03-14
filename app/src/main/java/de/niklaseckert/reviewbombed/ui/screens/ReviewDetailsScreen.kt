@@ -31,6 +31,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable to display details of a Review.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ReviewDetailsScreen(

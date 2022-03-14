@@ -31,7 +31,7 @@ import javax.inject.Singleton
 class GameModule {
 
     /**
-     * Method that provide the Get Game Use Case.
+     * Method that provides the Get Game Use Case.
      *
      * @param repository contains the Game Repository.
      * @return the Get Game Use Case.
@@ -43,7 +43,7 @@ class GameModule {
     }
 
     /**
-     * Method that provide the Game Repository.
+     * Method that provides the Game Repository.
      *
      * @param db contains the Game Database.
      * @param api contains the Game API.

@@ -14,6 +14,12 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.domain.model.DeveloperExcerpt
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
+/**
+ * Composable which calls the Developer Excerpt List.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Composable
 fun DeveloperExcerptListComponent(
     navController: NavController,

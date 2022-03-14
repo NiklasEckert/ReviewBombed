@@ -26,6 +26,12 @@ import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
 import kotlin.math.min
 
+/**
+ * Composable to display details of a Game.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun GameDetailScreen(
