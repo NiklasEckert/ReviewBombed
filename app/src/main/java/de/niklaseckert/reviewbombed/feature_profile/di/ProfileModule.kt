@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import de.niklaseckert.reviewbombed.core.data.LocalDateConverter
 import de.niklaseckert.reviewbombed.core.data.remote.ReviewBombedApi
 import de.niklaseckert.reviewbombed.core.data.util.GsonParser
 import de.niklaseckert.reviewbombed.core.util.BasicAuthInterceptor
@@ -25,34 +24,72 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Module that provides all Singletons that are needed for Profiles.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class ProfileModule {
 
+    /**
+     * Method that provides the Get Profile Use Case.
+     *
+     * @param repository contains the Profile Repository
+     * @return the Get Profile Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetProfile(repository: ProfileRepository): GetProfile {
         return GetProfile(repository)
     }
 
+    /**
+     * Method that provides the Get Profiles Use Case.
+     *
+     * @param repository contains the Profile Repository.
+     * @return the Get Profiles Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetProfiles(repository: ProfileRepository): GetProfiles {
         return GetProfiles(repository)
     }
 
+    /**
+     * Method that provides the Get Own Profile Use Case.
+     *
+     * @param repository contains the Profile Repository.
+     * @return the Get Own Profile Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetOwnProfile(repository: ProfileRepository): GetOwnProfile {
         return GetOwnProfile(repository)
     }
 
+    /**
+     * Method that provides the Profile Repository.
+     *
+     * @param db contains the Profile Database.
+     * @param api contains the Profile API.
+     * @param saveAccount contains the Save Account class.
+     * @return the Profile Repository.
+     */
     @Provides
     @Singleton
     fun provideProfileRepository(db: ProfileDb, api: ProfileApi, saveAccount: SaveAccount): ProfileRepository {
         return ProfileRepositoryImpl(api, db.dao, saveAccount)
     }
 
+    /**
+     * Method that provides the Profile Database.
+     *
+     * @param app contains the Application.
+     * @return the Profile Database.
+     */
     @Provides
     @Singleton
     fun provideProfileDb(app: Application): ProfileDb {
@@ -65,6 +102,12 @@ class ProfileModule {
             .build()
     }
 
+    /**
+     * Method that provides the Profile API.
+     *
+     * @param saveAccount contains the Save Account class.
+     * @return the Profile API.
+     */
     @Provides
     @Singleton
     fun provideProfileApi(saveAccount: SaveAccount): ProfileApi {
