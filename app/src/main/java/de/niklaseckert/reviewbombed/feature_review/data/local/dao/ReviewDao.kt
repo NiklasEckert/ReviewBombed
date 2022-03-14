@@ -32,6 +32,14 @@ interface ReviewDao {
     suspend fun deleteReviews(ids: List<Long>)
 
     /**
+     * Method to delete all Reviews in the database.
+     *
+     * @param ids contains a list of ids of Reviews which should be deleted.
+     */
+    @Query("DELETE FROM reviewentity")
+    suspend fun clearDatabase()
+
+    /**
      * Method to select all Reviews.
      *
      * @return a list of all Reviews.

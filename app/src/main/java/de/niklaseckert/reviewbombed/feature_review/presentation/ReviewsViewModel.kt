@@ -11,6 +11,7 @@ import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountViewModel
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.FetchFromServer
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReviews
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
 import kotlinx.coroutines.flow.launchIn
@@ -33,7 +34,10 @@ class ReviewsViewModel @Inject constructor(
     private val getReviews: GetReviews,
 
     /** Contains the Post Reviews Use Case. */
-    private val postReview: PostReview
+    private val postReview: PostReview,
+
+    /** Contains the FetchFromServerUseCase. */
+    private val fetchFromServer: FetchFromServer
 ) : ViewModel() {
 
     /** Represents the Reviews State. */
@@ -45,6 +49,7 @@ class ReviewsViewModel @Inject constructor(
         /**
          * Initialize with all Reviews.
          */
+//        fetchFromServerFun()
         onGetReviews()
     }
 
@@ -89,6 +94,12 @@ class ReviewsViewModel @Inject constructor(
         viewModelScope.launch {
             postReview(review = review, gameId = gameId)
 //            onGetReviews()
+        }
+    }
+
+    fun fetchFromServerFun() {
+        viewModelScope.launch {
+            fetchFromServer()
         }
     }
 }

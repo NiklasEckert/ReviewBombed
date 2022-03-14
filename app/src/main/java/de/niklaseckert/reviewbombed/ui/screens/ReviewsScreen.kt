@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -36,7 +38,12 @@ fun ReviewsScreen(
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_reviews)
     topBarViewModel.isEnabled = true
-    topBarViewModel.isTopBarActionEnabled = false
+
+    topBarViewModel.isTopBarActionEnabled = true
+    topBarViewModel.topBarActionIcon = Icons.Filled.Refresh
+    topBarViewModel.topBarActionFunction = {
+        reviewsViewModel.onGetReviews()
+    }
 
     Column(
         modifier = Modifier

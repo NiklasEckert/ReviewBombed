@@ -17,10 +17,7 @@ import de.niklaseckert.reviewbombed.feature_review.data.local.ReviewTypeConverte
 import de.niklaseckert.reviewbombed.feature_review.data.remote.ReviewApi
 import de.niklaseckert.reviewbombed.feature_review.data.respository.ReviewRepositoryImpl
 import de.niklaseckert.reviewbombed.feature_review.domain.repository.ReviewRepository
-import de.niklaseckert.reviewbombed.feature_review.domain.use_case.DeleteReview
-import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReview
-import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReviews
-import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -70,11 +67,10 @@ class ReviewModule {
     }
 
     /**
-     * Method that provides the Review Repository.
+     * Method that provides the Delete Review Use Case.
      *
-     * @param db contains the Review Database.
-     * @param api contains the Review API.
-     * @return the Review Repository.
+     * @param repository contains the Review Repository.
+     * @return the Post Review Use Case.
      */
     @Provides
     @Singleton
@@ -82,6 +78,19 @@ class ReviewModule {
         return DeleteReview(repository)
     }
 
+    @Provides
+    @Singleton
+    fun provideFetchFromServer(repository: ReviewRepository): FetchFromServer {
+        return FetchFromServer(repository)
+    }
+
+    /**
+     * Method that provides the Review Repository.
+     *
+     * @param db contains the Review Database.
+     * @param api contains the Review API.
+     * @return the Review Repository.
+     */
     @Provides
     @Singleton
     fun provideReviewRepository(db: ReviewDb, api: ReviewApi): ReviewRepository {

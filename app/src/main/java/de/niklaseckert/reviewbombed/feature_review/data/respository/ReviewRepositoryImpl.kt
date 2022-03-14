@@ -40,7 +40,8 @@ class ReviewRepositoryImpl(
 
         try {
             val remoteReviews = api.getReviews()
-            dao.deleteReviews(remoteReviews.map { it.id })
+//            dao.deleteReviews(remoteReviews.map { it.id })
+            dao.clearDatabase()
             dao.insertReviews(remoteReviews.map { it.toReviewEntity() })
         } catch (e: HttpException) {
             emit(Resource.Error(
@@ -106,6 +107,13 @@ class ReviewRepositoryImpl(
         runBlocking {
             api.deleteReview(reviewId = reviewId)
             dao.deleteReviews(listOf(reviewId))
+        }
+    }
+
+    override fun fetchFromServer() {
+        runBlocking {
+            dao.clearDatabase()
+            getReviews()
         }
     }
 }

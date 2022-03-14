@@ -37,4 +37,6 @@ interface ReviewRepository {
     fun postReview(review: ReviewPostDto, gameId: Long)
 
     fun deleteReview(reviewId: Long)
+
+    fun fetchFromServer()
 }
