@@ -1,7 +1,9 @@
 package de.niklaseckert.reviewbombed.ui.components.screenshots
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,14 +18,21 @@ import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 @Composable
 fun ScreenshotExcerptListComponent(
     screenshots: List<ScreenshotExcerpt>,
-    navController: NavController
+    navController: NavController,
+    modifier: Modifier = Modifier
 ) {
-    Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-    Text(
-        text = stringResource(id = R.string.screenshot_comp_headline),
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold
-    )
-    Spacer(modifier = Modifier.height(GeneralUnits.BASE_PADDING))
-    ScreenshotExcerptList(screenshots = screenshots, navController = navController)
+    Column(
+        modifier = Modifier
+    ) {
+        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+        Text(
+            text = stringResource(id = R.string.screenshot_comp_headline),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+        )
+        Spacer(modifier = Modifier.height(GeneralUnits.BASE_PADDING))
+        ScreenshotExcerptList(screenshots = screenshots, navController = navController)
+    }
+
 }

@@ -102,27 +102,27 @@ fun GameDetailScreen(
                             top.linkTo(info.bottom)
                         }
                 ) {
-                    Column(
-                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
-                    ) {
+                    Column() {
                         Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                        Divider()
+                        Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
                         ScreenshotExcerptListComponent(
                             screenshots = game.screenshots,
                             navController = navController
                         )
 
                         Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                        Divider()
+                        Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
                         PublisherExcerptListComponent(
                             navController = navController,
-                            publishers = game.publishers
+                            publishers = game.publishers,
+                            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
                         )
 
                         Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
                         DeveloperExcerptListComponent(
                             navController = navController,
-                            developers = game.developers
+                            developers = game.developers,
+                            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
                         )
                     }
 
