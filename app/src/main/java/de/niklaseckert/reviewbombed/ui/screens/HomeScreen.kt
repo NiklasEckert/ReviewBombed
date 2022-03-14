@@ -27,11 +27,13 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.app_name)
+    topBarViewModel.isEnabled = true
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
+            .padding(top = topBarViewModel.topBarPadding)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         CurrentlyPlayingComponent(navController = navController)

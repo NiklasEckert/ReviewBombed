@@ -16,8 +16,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
+import de.niklaseckert.reviewbombed.core.presentation.TopBarViewModel
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListViewModel
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -27,15 +30,20 @@ fun ListDetailScreen(
 ) {
     val listState = listViewModel.state.value
 
-    Box(
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.isEnabled = true
+
+    Column(
         modifier = Modifier
-            .padding(8.dp)
-            .background(MaterialTheme.colors.background)
+            .padding(top = topBarViewModel.topBarPadding)
     ) {
         listState.listModelItem?.let { listModel ->
-            Column() {
+            Column(
+                modifier = Modifier
+                    .padding(GeneralUnits.BASE_PADDING)
+            ) {
                 Text(
-                    text = stringResource(id = R.string.list_headline) + ": " + listModel.name,
+                    text = listModel.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 26.sp
                 )

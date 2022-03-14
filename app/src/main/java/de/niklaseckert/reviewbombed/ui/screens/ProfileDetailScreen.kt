@@ -39,11 +39,14 @@ fun ProfileDetailScreen(
 
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_profile)
+    topBarViewModel.isEnabled = true
 
     Column(
         modifier = Modifier
             //.fillMaxSize()
-            .padding(GeneralUnits.BASE_PADDING)
+            .padding(
+                top = topBarViewModel.topBarPadding
+            )
             .verticalScroll(scrollState)
     ) {
         profileState.profileItem?.let { profile ->
@@ -73,12 +76,12 @@ fun ProfileDetailScreen(
             }
 
             Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-            Divider()
+            Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
 
             ReviewsOfUserComponent(navController = navController, reviews = profile.reviews)
 
             Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-            Divider()
+            Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
 
             ListsOfUserComponent(navController = navController, lists = profile.listExcerpts)
         }

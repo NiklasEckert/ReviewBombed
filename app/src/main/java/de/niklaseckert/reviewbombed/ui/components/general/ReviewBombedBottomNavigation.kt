@@ -29,50 +29,26 @@ fun ReviewBombedBottomNavigation(
         val currentDestination = navBackStackEntry?.destination
 
         items.forEach { screen ->
-            if (screen is ReviewBombedNavigationScreen.Profile) {
-                BottomNavigationItem(
-                    icon = {
-                        Icon(
-                            imageVector = screen.icon,
-                            contentDescription = null
-                        )
-                    },
-                    label = { Text(text = stringResource(id = screen.resourceId)) },
-                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                    onClick = {
-                        navController.navigate("profile/1") {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-
-                            launchSingleTop = true
-                            restoreState = true
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        imageVector = screen.icon,
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = stringResource(id = screen.resourceId)) },
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                onClick = {
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
-                    }
-                )
-            } else {
-                BottomNavigationItem(
-                    icon = {
-                        Icon(
-                            imageVector = screen.icon,
-                            contentDescription = null
-                        )
-                    },
-                    label = { Text(text = stringResource(id = screen.resourceId)) },
-                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                    onClick = {
-                        navController.navigate(screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
 
-                            launchSingleTop = true
-                            restoreState = true
-                        }
+                        launchSingleTop = true
+                        restoreState = true
                     }
-                )
-            }
-
+                }
+            )
         }
     }
 }

@@ -11,9 +11,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
+import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -23,9 +25,17 @@ fun ReviewDetailsScreen(
 ) {
     val reviewState = reviewViewModel.state.value
 
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.isEnabled = true
+
     Column(
         modifier = Modifier
-            .padding(all = 8.dp)
+            .padding(
+                top = topBarViewModel.topBarPadding + GeneralUnits.BASE_PADDING,
+                start = GeneralUnits.BASE_PADDING,
+                end = GeneralUnits.BASE_PADDING,
+                bottom = GeneralUnits.BASE_PADDING
+            )
     ) {
         reviewState.reviewItem?.let { review ->
             Row(

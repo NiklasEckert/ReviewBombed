@@ -28,10 +28,14 @@ fun ReviewsScreen(
 
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_reviews)
+    topBarViewModel.isEnabled = true
 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(
+                top = topBarViewModel.topBarPadding
+            )
     ) {
         LazyColumn() {
             items(reviewsState.reviewItems.size) { index ->

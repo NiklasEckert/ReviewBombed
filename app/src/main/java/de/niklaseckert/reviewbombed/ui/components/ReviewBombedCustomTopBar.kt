@@ -7,7 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,10 +38,12 @@ fun ReviewBombedCustomTopBar(
             .background(MaterialTheme.colors.primaryVariant)
             .padding(vertical = GeneralUnits.BASE_PADDING),
         horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             modifier = Modifier
-                .size(24.dp)
+                .size(32.dp)
+                .padding(start = GeneralUnits.BASE_PADDING)
         ) {
 
         }
@@ -46,15 +52,14 @@ fun ReviewBombedCustomTopBar(
             Text(
                 text = topBarViewModel.topBarText,
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 24.sp,
-                modifier = Modifier
-                    .background(MaterialTheme.colors.primaryVariant)
+                fontSize = 24.sp
             )
         }
 
         Column(
             modifier = Modifier
-                .size(24.dp)
+                .size(32.dp)
+                .padding(end = GeneralUnits.BASE_PADDING)
         ) {
             IconButton(
                 onClick = {

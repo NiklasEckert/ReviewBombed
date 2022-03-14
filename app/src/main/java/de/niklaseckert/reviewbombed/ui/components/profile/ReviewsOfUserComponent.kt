@@ -32,13 +32,18 @@ fun ReviewsOfUserComponent(
         Text(
             text = stringResource(id = R.string.review_headline),
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
         )
         
         Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
 
         LazyRow {
             items(reviews.size) { index ->
+                if (index == 0) {
+                    Spacer(modifier = Modifier.width(GeneralUnits.BASE_PADDING))
+                }
+                
                 Card(
                     modifier = Modifier
                         .fillMaxHeight()

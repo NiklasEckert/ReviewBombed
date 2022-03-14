@@ -3,6 +3,7 @@ package de.niklaseckert.reviewbombed.ui.components.profile
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,7 +27,9 @@ fun ListsOfUserComponent(
             .height(GeneralUnits.COMPONENT_SPACER_HEIGHT)
     )
 
-    Column() {
+    Column(
+        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+    ) {
         Text(
             text = stringResource(id = R.string.bottom_nav_lists),
             fontSize = 16.sp,

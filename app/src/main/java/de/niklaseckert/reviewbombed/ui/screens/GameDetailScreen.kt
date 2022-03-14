@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.feature_game.presentation.GameViewModel
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.ui.components.developerexcerpts.DeveloperExcerptListComponent
@@ -43,6 +44,9 @@ fun GameDetailScreen(
         skipHalfExpanded = skipHalfExpanded
     )
 
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.isEnabled = false
+
     gameState.gameItem?.let { game ->
 
         ModalBottomSheetLayout(
@@ -52,100 +56,91 @@ fun GameDetailScreen(
             },
             sheetElevation = 26.dp
         ) {
-            Scaffold(
-                topBar = {
-//                ReviewBombedCustomTopBar(text = game.title)
-                }
+            ConstraintLayout(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState)
             ) {
-                ConstraintLayout(
+                val (image, sp, fab, info, comps) = createRefs()
+
+                GameDetailPreviewImage(
+                    url = game.previewImageUrl,
+                    imageModifier = Modifier
+                        .constrainAs(image) { top.linkTo(parent.top) }
+                        .height(configuration.screenHeightDp.dp / 2)
+                        .graphicsLayer {
+                            alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
+                            translationY = +rememberScrollState.value * 0.7f
+                        },
+                    spacerModifier = Modifier
+                        .constrainAs(sp) {
+                            bottom.linkTo(image.bottom)
+                        }
+                )
+
+                Box(
                     modifier = Modifier
-                        .verticalScroll(rememberScrollState)
+                        .background(MaterialTheme.colors.background)
+                        .constrainAs(info) {
+                            top.linkTo(image.bottom)
+                        }
                 ) {
-                    val (image, sp, fab, info, comps) = createRefs()
-
-                    GameDetailPreviewImage(
-                        url = game.previewImageUrl,
-                        imageModifier = Modifier
-                            .constrainAs(image) { top.linkTo(parent.top) }
-                            .height(configuration.screenHeightDp.dp / 2)
-                            .graphicsLayer {
-                                alpha = min(1f, 1 - (rememberScrollState.value / 1500f))
-                                translationY = +rememberScrollState.value * 0.7f
-                            },
-                        spacerModifier = Modifier
-                            .constrainAs(sp) {
-                                bottom.linkTo(image.bottom)
-                            }
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .background(MaterialTheme.colors.background)
-                            .constrainAs(info) {
-                                top.linkTo(image.bottom)
-                            }
+                    Column(
+                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
                     ) {
-                        Column(
-                            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
-                        ) {
-                            GameDetailHeadline(text = game.title)
-                            LocalDateText(date = game.date)
-                            Text(
-                                text = game.description
-                            )
-                        }
+                        GameDetailHeadline(text = game.title)
+                        LocalDateText(date = game.date)
+                        Text(
+                            text = game.description
+                        )
                     }
-
-                    Box(
-                        modifier = Modifier
-                            .background(MaterialTheme.colors.background)
-                            .constrainAs(comps) {
-                                top.linkTo(info.bottom)
-                            }
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
-                        ) {
-                            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                            Divider()
-                            ScreenshotExcerptListComponent(
-                                screenshots = game.screenshots,
-                                navController = navController
-                            )
-
-                            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                            Divider()
-                            PublisherExcerptListComponent(
-                                navController = navController,
-                                publishers = game.publishers
-                            )
-
-                            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                            DeveloperExcerptListComponent(
-                                navController = navController,
-                                developers = game.developers
-                            )
-                        }
-
-                    }
-
-                    GameDetailFloatingActionButton(
-                        modifier = Modifier
-                            .constrainAs(fab) {
-                                centerAround(image.bottom)
-                                absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
-                            },
-                        onClick = {
-                            scope.launch {
-                                sheetState.animateTo(ModalBottomSheetValue.Expanded)
-                            }
-                        }
-                    )
                 }
+
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colors.background)
+                        .constrainAs(comps) {
+                            top.linkTo(info.bottom)
+                        }
+                ) {
+                    Column(
+                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+                    ) {
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        Divider()
+                        ScreenshotExcerptListComponent(
+                            screenshots = game.screenshots,
+                            navController = navController
+                        )
+
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        Divider()
+                        PublisherExcerptListComponent(
+                            navController = navController,
+                            publishers = game.publishers
+                        )
+
+                        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+                        DeveloperExcerptListComponent(
+                            navController = navController,
+                            developers = game.developers
+                        )
+                    }
+
+                }
+
+                GameDetailFloatingActionButton(
+                    modifier = Modifier
+                        .constrainAs(fab) {
+                            centerAround(image.bottom)
+                            absoluteRight.linkTo(parent.absoluteRight, margin = 16.dp)
+                        },
+                    onClick = {
+                        scope.launch {
+                            sheetState.animateTo(ModalBottomSheetValue.Expanded)
+                        }
+                    }
+                )
             }
         }
-
-
-
     }
 }

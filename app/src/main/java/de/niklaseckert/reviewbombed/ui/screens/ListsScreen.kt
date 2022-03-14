@@ -25,15 +25,20 @@ fun ListsScreen(
 ) {
     val listExcerptViewModel: ListExcerptViewModel = hiltViewModel()
     val listExcerptState = listExcerptViewModel.state.value
+
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_lists)
+    topBarViewModel.isEnabled = true
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .padding(top = topBarViewModel.topBarPadding)
     ) {
-        LazyColumn() {
+        LazyColumn(
+            modifier = Modifier
+                .padding(GeneralUnits.BASE_PADDING)
+        ) {
             items(listExcerptState.listExcerptItems.size) { index ->
                 val listExcerpt = listExcerptState.listExcerptItems[index]
 

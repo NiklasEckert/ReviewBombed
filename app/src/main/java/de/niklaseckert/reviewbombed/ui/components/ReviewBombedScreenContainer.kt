@@ -1,14 +1,23 @@
 package de.niklaseckert.reviewbombed.ui.components
 
-import androidx.compose.material.Scaffold
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.accompanist.insets.ui.Scaffold
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.ReviewBombedScreen
 import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
@@ -19,16 +28,32 @@ fun ReviewBombedScreenContainer() {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
 
+//    val topBarState = rememberSaveable { mutableStateOf(true) }
+    val topBarViewModel = TopBarState.current
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            ReviewBombedCustomTopBar()
+            AnimatedVisibility(
+                visible = topBarViewModel.isEnabled,
+                enter = slideInVertically(initialOffsetY = { -it }),
+                exit = slideOutVertically(targetOffsetY = { -it })
+            ) {
+                ReviewBombedCustomTopBar()
+            }
         },
         bottomBar = {
             ReviewBombedBottomNavigation(navController = navController)
         },
-    ) {
-        ReviewBombedNavHost(navController = navController)
+    ) { innerPaddings ->
+        topBarViewModel.topBarPadding = innerPaddings.calculateTopPadding()
+        Box(modifier = Modifier
+            .padding(
+                bottom = innerPaddings.calculateBottomPadding()
+            )
+        ) {
+            ReviewBombedNavHost(navController = navController)
+        }
     }
 }
 
