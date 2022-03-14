@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
@@ -25,46 +26,42 @@ fun ReviewsScreen(
     val reviewsViewModel: ReviewsViewModel = hiltViewModel()
     val reviewsState = reviewsViewModel.state.value
 
-    Scaffold(
-        topBar = {
-            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_reviews))
-        },
-        bottomBar = {
-            ReviewBombedBottomNavigation(navController = navController)
-        }
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_reviews)
+    topBarViewModel.isEnabled = true
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                top = topBarViewModel.topBarPadding
+            )
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                //.padding(vertical = 16.dp)
-        ) {
-            LazyColumn() {
-                items(reviewsState.reviewItems.size) { index ->
-                    val review = reviewsState.reviewItems[index]
+        LazyColumn() {
+            items(reviewsState.reviewItems.size) { index ->
+                val review = reviewsState.reviewItems[index]
 
-                    Card(
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(GeneralUnits.BASE_PADDING)
+                ) {
+                    ReviewExcerptItem(
+                        review = review,
+                        navController = navController,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                if (index < reviewsState.reviewItems.size - 1) {
+                    Divider(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(GeneralUnits.BASE_PADDING)
-                            //.height(256.dp)
-                    ) {
-                        ReviewExcerptItem(
-                            review = review,
-                            navController = navController,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-
-                    if (index < reviewsState.reviewItems.size-1) {
-                        Divider(
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp)
-                        )
-                    }
+                            .padding(horizontal = 8.dp)
+                    )
                 }
             }
         }
     }
-    
+
 
 }

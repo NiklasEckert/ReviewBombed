@@ -20,6 +20,10 @@ fun ScreenshotExcerptList(
     val configuration = LocalConfiguration.current
     LazyRow {
         items(screenshots.size) { index ->
+            if (index == 0) {
+                Spacer(modifier = Modifier.width(GeneralUnits.BASE_PADDING))
+            }
+            
             ScreenshotExcerptItem(
                 screenshotExcerpt = screenshots[index],
                 navController = navController,
@@ -27,9 +31,8 @@ fun ScreenshotExcerptList(
                     .width(configuration.screenWidthDp.dp - GeneralUnits.BASE_PADDING - GeneralUnits.BASE_PADDING)
             )
 
-            if (index < screenshots.size-1) {
-                Spacer(modifier = Modifier.width(GeneralUnits.BASE_PADDING))
-            }
+            Spacer(modifier = Modifier.width(GeneralUnits.BASE_PADDING))
+
         }
     }
 }

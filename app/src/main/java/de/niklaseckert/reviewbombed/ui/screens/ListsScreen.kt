@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListExcerptViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
@@ -25,27 +26,24 @@ fun ListsScreen(
     val listExcerptViewModel: ListExcerptViewModel = hiltViewModel()
     val listExcerptState = listExcerptViewModel.state.value
 
-    Scaffold(
-        topBar = {
-            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_lists))
-        },
-        bottomBar = {
-            ReviewBombedBottomNavigation(navController = navController)
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-        ) {
-            LazyColumn() {
-                items(listExcerptState.listExcerptItems.size) { index ->
-                    val listExcerpt = listExcerptState.listExcerptItems[index]
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_lists)
+    topBarViewModel.isEnabled = true
 
-                    ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
-                }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = topBarViewModel.topBarPadding)
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(GeneralUnits.BASE_PADDING)
+        ) {
+            items(listExcerptState.listExcerptItems.size) { index ->
+                val listExcerpt = listExcerptState.listExcerptItems[index]
+
+                ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
             }
         }
     }
-
 }

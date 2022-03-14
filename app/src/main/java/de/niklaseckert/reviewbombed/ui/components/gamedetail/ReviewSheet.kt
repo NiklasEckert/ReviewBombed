@@ -90,10 +90,10 @@ fun AddReviewSheet(
                                 id = -1,
                                 title = reviewTitle,
                                 reviewDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                rate = sliderPosition.toInt(),
+                                rate = sliderPosition.toInt() + 1,
                                 reviewText = reviewText
                             ),
-                            game = game
+                            gameId = game.id
                         )
                         sheetState.hide()
                         reviewText = ""

@@ -58,9 +58,9 @@ class ReviewsViewModel @Inject constructor(
         }
     }
 
-    fun onPostReview(review: ReviewPostDto, game: Game) {
+    fun onPostReview(review: ReviewPostDto, gameId: Long) {
         viewModelScope.launch {
-            postReview(review = review, game = game)
+            postReview(review = review, gameId = gameId)
 //            onGetReviews()
         }
     }

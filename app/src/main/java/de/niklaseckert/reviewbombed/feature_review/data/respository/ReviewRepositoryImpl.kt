@@ -70,9 +70,9 @@ class ReviewRepositoryImpl(
         emit(Resource.Success(newReview))
     }
 
-    override fun postReview(review: ReviewPostDto, game: Game) {
+    override fun postReview(review: ReviewPostDto, gameId: Long) {
         runBlocking {
-            api.postReview(review = review, gameId = game.id)
+            api.postReview(review = review, gameId = gameId)
         }
     }
 }

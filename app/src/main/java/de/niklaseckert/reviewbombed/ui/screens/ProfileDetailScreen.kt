@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.feature_profile.presentation.ProfileViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
@@ -34,63 +35,57 @@ fun ProfileDetailScreen(
 
     val profileViewModel: ProfileViewModel = hiltViewModel()
     val profileState = profileViewModel.state.value
-    val scaffoldState = rememberScaffoldState()
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_profile))
-        },
-        bottomBar = {
-            ReviewBombedBottomNavigation(navController = navController)
-        }
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_profile)
+    topBarViewModel.isEnabled = true
+
+    Column(
+        modifier = Modifier
+            //.fillMaxSize()
+            .padding(
+                top = topBarViewModel.topBarPadding
+            )
+            .verticalScroll(scrollState)
     ) {
-        Column(
-            modifier = Modifier
-                //.fillMaxSize()
-                .padding(GeneralUnits.BASE_PADDING)
-                .verticalScroll(scrollState)
-        ) {
-            profileState.profileItem?.let { profile ->
+        profileState.profileItem?.let { profile ->
 
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        AsyncImage(
-                            model = profile.profileImageUrl,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(128.dp)
-                                .border(
-                                    shape = RoundedCornerShape(percent = 50),
-                                    width = 1.dp,
-                                    color = Color.Transparent
-                                )
-                        )
+                    AsyncImage(
+                        model = profile.profileImageUrl,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(128.dp)
+                            .border(
+                                shape = RoundedCornerShape(percent = 50),
+                                width = 1.dp,
+                                color = Color.Transparent
+                            )
+                    )
 
-                        Text(text = profile.name)
-                    }
+                    Text(text = profile.name)
                 }
-
-                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                Divider()
-
-                ReviewsOfUserComponent(navController = navController, reviews = profile.reviews)
-
-                Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-                Divider()
-
-                ListsOfUserComponent(navController = navController, lists = profile.listExcerpts)
             }
+
+            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+            Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
+
+            ReviewsOfUserComponent(navController = navController, reviews = profile.reviews)
+
+            Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+            Divider(modifier = Modifier.padding(GeneralUnits.BASE_PADDING))
+
+            ListsOfUserComponent(navController = navController, lists = profile.listExcerpts)
         }
     }
-    
-    
+
 
 }

@@ -1,5 +1,6 @@
 package de.niklaseckert.reviewbombed.ui.components.developerexcerpts
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Text
@@ -16,14 +17,20 @@ import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 @Composable
 fun DeveloperExcerptListComponent(
     navController: NavController,
-    developers: List<DeveloperExcerpt>
+    developers: List<DeveloperExcerpt>,
+    modifier: Modifier = Modifier
 ) {
-    Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
-    Text(
-        text = stringResource(id = R.string.developer_comp_headline),
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold
-    )
-    Spacer(modifier = Modifier.height(GeneralUnits.BASE_PADDING))
-    DevelopersExcerptList(developers = developers, navController = navController)
+    Column(
+        modifier = modifier
+    ) {
+        Spacer(modifier = Modifier.height(GeneralUnits.COMPONENT_SPACER_HEIGHT))
+        Text(
+            text = stringResource(id = R.string.developer_comp_headline),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(GeneralUnits.BASE_PADDING))
+        DevelopersExcerptList(developers = developers, navController = navController)
+    }
+
 }
