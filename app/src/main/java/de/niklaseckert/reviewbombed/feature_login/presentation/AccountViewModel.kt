@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.AutomaticSignIn
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignIn
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignOut
@@ -18,7 +19,8 @@ val AccountState = compositionLocalOf<AccountViewModel> { error("User State Cont
 class AccountViewModel @Inject constructor(
     private val signIn: SignIn,
     private val automaticSignIn: AutomaticSignIn,
-    private val signOut: SignOut
+    private val signOut: SignOut,
+    val saveAccount: SaveAccount
 ) : ViewModel() {
 
     var isLoggedIn by mutableStateOf(false)
