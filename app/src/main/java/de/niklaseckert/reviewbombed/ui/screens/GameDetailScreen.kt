@@ -92,7 +92,9 @@ fun GameDetailScreen(
                         }
                 ) {
                     Column(
-                        modifier = Modifier.padding(GeneralUnits.BASE_PADDING)
+                        modifier = Modifier
+                            .padding(GeneralUnits.BASE_PADDING)
+                            .fillMaxWidth()
                     ) {
                         GameDetailHeadline(text = game.title)
                         LocalDateText(date = game.date)
