@@ -1,7 +1,6 @@
 package de.niklaseckert.reviewbombed.feature_review.di
 
 import android.app.Application
-import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.room.Room
 import com.google.gson.Gson
 import dagger.Module
@@ -26,34 +25,68 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Module that provides all Singletons that are needed for the Reviews.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class ReviewModule {
 
+    /**
+     * Method that provides the Get Review Use Case.
+     *
+     * @param repository contains the Review Repository.
+     * @return the Get Review Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetReview(repository: ReviewRepository): GetReview {
         return GetReview(repository)
     }
 
+    /**
+     * Method that provides the Get Reviews Use Case.
+     *
+     * @param repository contains the Review Repository.
+     * @return the Get Reviews Use Case.
+     */
     @Provides
     @Singleton
     fun provideGetReviews(repository: ReviewRepository): GetReviews {
         return GetReviews(repository)
     }
 
+    /**
+     * Method that provides the Post Review Use Case.
+     *
+     * @param repository contains the Review Repository.
+     * @return the Post Review Use Case.
+     */
     @Provides
     @Singleton
     fun providePostReview(repository: ReviewRepository): PostReview {
         return PostReview(repository)
     }
 
+    /**
+     * Method that provides the Review Repository.
+     *
+     * @param db contains the Review Database.
+     * @param api contains the Review API.
+     * @return the Review Repository.
+     */
     @Provides
     @Singleton
     fun provideReviewRepository(db: ReviewDb, api: ReviewApi): ReviewRepository {
         return ReviewRepositoryImpl(api, db.dao)
     }
 
+    /**
+     * Method that provides the Review Database.
+     *
+     * @param app contains the Application.
+     * @return the Review Database.
+     */
     @Provides
     @Singleton
     fun provideReviewDb(app: Application): ReviewDb {
@@ -67,6 +100,12 @@ class ReviewModule {
             .build()
     }
 
+    /**
+     * Method that provides the Review API.
+     *
+     * @param saveAccount contains the Save Account class.
+     * @return the Review API.
+     */
     @Provides
     @Singleton
     fun provideReviewApi(saveAccount: SaveAccount): ReviewApi {

@@ -15,22 +15,44 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Class which represents the View Model for Reviews.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @HiltViewModel
 class ReviewViewModel @Inject constructor(
+
+    /** Contains the Get Review Use Case. */
     private val getReview: GetReview,
+
+    /** Contains the Post Review Use Case. */
     private val postReview: PostReview,
+
+    /** Contains all saved states which the View Model can refer to. */
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    /** Represents the Review State. */
     private val _state = mutableStateOf(ReviewState())
     val state: State<ReviewState> = _state
 
     init {
+
+        /**
+         * Initialize saved state handle with the current Review id.
+         */
         savedStateHandle.get<String>("reviewId")?.let { reviewId ->
             onGetReview(reviewId.toLong())
         }
     }
 
+    /**
+     * Method to get a specific Review.
+     *
+     * @param reviewId contains the id of a Game.
+     */
     fun onGetReview(reviewId: Long) {
         viewModelScope.launch {
             getReview(reviewId = reviewId)
@@ -59,6 +81,12 @@ class ReviewViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Method to edit a Review.
+     *
+     * @param review contains the new Review.
+     * @param gameId contains the id of the Game which the Review refers to.
+     */
     fun onEditReview(review: ReviewPostDto, gameId: Long) {
         viewModelScope.launch {
             postReview(review = review, gameId = gameId)

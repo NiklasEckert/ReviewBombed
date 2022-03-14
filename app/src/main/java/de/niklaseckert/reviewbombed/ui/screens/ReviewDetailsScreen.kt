@@ -1,15 +1,11 @@
 package de.niklaseckert.reviewbombed.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,20 +13,22 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import de.niklaseckert.reviewbombed.core.presentation.TopBarState
-import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
 import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
-import de.niklaseckert.reviewbombed.ui.components.gamedetail.AddReviewSheet
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.EditReviewSheet
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.format.DateTimeFormatter
 
+/**
+ * Composable to display details of a Review.
+ *
+ * @author Niklas Eckert
+ * @author Jakob Friedsam
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ReviewDetailsScreen(
