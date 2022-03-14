@@ -13,4 +13,6 @@ interface ReviewRepository {
     fun getReview(reviewId: Long): Flow<Resource<Review>>
 
     fun postReview(review: ReviewPostDto, gameId: Long)
+
+    fun deleteReview(reviewId: Long)
 }

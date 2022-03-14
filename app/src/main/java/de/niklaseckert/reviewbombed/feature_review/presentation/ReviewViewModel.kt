@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.DeleteReview
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReview
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
 import kotlinx.coroutines.flow.launchIn
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class ReviewViewModel @Inject constructor(
     private val getReview: GetReview,
     private val postReview: PostReview,
+    private val deleteReview: DeleteReview,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -62,6 +64,12 @@ class ReviewViewModel @Inject constructor(
     fun onEditReview(review: ReviewPostDto, gameId: Long) {
         viewModelScope.launch {
             postReview(review = review, gameId = gameId)
+        }
+    }
+
+    fun onDeleteReview(reviewId: Long) {
+        viewModelScope.launch {
+            deleteReview(reviewId = reviewId)
         }
     }
 }

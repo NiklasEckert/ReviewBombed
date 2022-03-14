@@ -1,12 +1,14 @@
 package de.niklaseckert.reviewbombed.feature_review.presentation
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
 import de.niklaseckert.reviewbombed.feature_game.domain.model.Game
+import de.niklaseckert.reviewbombed.feature_login.presentation.AccountViewModel
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewDto
 import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
 import de.niklaseckert.reviewbombed.feature_review.domain.model.Review
@@ -16,6 +18,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+val ReviewsViewModelState = compositionLocalOf<ReviewsViewModel> { error("User State Context Not Found!") }
 
 @HiltViewModel
 class ReviewsViewModel @Inject constructor(

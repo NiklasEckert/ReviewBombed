@@ -75,4 +75,11 @@ class ReviewRepositoryImpl(
             api.postReview(review = review, gameId = gameId)
         }
     }
+
+    override fun deleteReview(reviewId: Long) {
+        runBlocking {
+            api.deleteReview(reviewId = reviewId)
+            dao.deleteReviews(listOf(reviewId))
+        }
+    }
 }

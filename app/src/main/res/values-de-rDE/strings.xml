@@ -21,4 +21,9 @@
     <string name="add_review_title">Titel</string>
     <string name="add_review_i_played">Ich spielte</string>
     <string name="add_review_text">Text</string>
+    <string name="btn_save">Speichern</string>
+    <string name="btn_cancel">Abbrechen</string>
+    <string name="btn_delete">Löschen</string>
+    <string name="review_delete_title">Review löschen?</string>
+    <string name="review_delete_text">Das kann nicht rückgängig gemacht werden!</string>
 </resources>

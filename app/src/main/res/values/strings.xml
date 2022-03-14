@@ -21,4 +21,9 @@
     <string name="add_review_title">Title</string>
     <string name="add_review_i_played">I played</string>
     <string name="add_review_text">Text</string>
+    <string name="review_delete_title">Delete Review?</string>
+    <string name="review_delete_text">This cannot be undone!</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_delete">Delete</string>
 </resources>

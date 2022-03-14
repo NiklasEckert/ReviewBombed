@@ -18,6 +18,7 @@ import de.niklaseckert.reviewbombed.feature_review.data.local.ReviewTypeConverte
 import de.niklaseckert.reviewbombed.feature_review.data.remote.ReviewApi
 import de.niklaseckert.reviewbombed.feature_review.data.respository.ReviewRepositoryImpl
 import de.niklaseckert.reviewbombed.feature_review.domain.repository.ReviewRepository
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.DeleteReview
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReview
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReviews
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
@@ -46,6 +47,12 @@ class ReviewModule {
     @Singleton
     fun providePostReview(repository: ReviewRepository): PostReview {
         return PostReview(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteReview(repository: ReviewRepository): DeleteReview {
+        return DeleteReview(repository)
     }
 
     @Provides

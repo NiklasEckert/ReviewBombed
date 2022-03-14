@@ -15,4 +15,7 @@ interface ReviewApi {
 
     @POST("reviews")
     suspend fun postReview(@Body review: ReviewPostDto, @Header("gameId") gameId: Long): ReviewDto
+
+    @DELETE("reviews")
+    suspend fun deleteReview(@Header("reviewId") reviewId: Long)
 }

@@ -15,7 +15,7 @@ interface ReviewDao {
     @Query("DELETE FROM reviewentity WHERE id IN (:ids)")
     suspend fun deleteReviews(ids: List<Long>)
 
-    @Query("SELECT * FROM reviewentity")
+    @Query("SELECT * FROM reviewentity ORDER BY reviewDate DESC")
     suspend fun getAllReviews(): List<ReviewEntity>
 
     @Query("SELECT * FROM reviewentity WHERE id = :id LIMIT 1")

@@ -1,32 +1,32 @@
 package de.niklaseckert.reviewbombed.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import coil.compose.AsyncImage
+import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.presentation.TopBarState
-import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
-import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModelState
+import de.niklaseckert.reviewbombed.ui.ReviewBombedNavigationScreen
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedRatingBar
-import de.niklaseckert.reviewbombed.ui.components.gamedetail.AddReviewSheet
 import de.niklaseckert.reviewbombed.ui.components.gamedetail.EditReviewSheet
+import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
+import de.niklaseckert.reviewbombed.ui.components.items.GameExcerptItem
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.format.DateTimeFormatter
@@ -38,6 +38,7 @@ fun ReviewDetailsScreen(
     navController: NavController
 ) {
     val accountViewModel = AccountState.current
+    val reviewsViewModel = ReviewsViewModelState.current
 
     val reviewState = reviewViewModel.state.value
 
@@ -48,17 +49,52 @@ fun ReviewDetailsScreen(
         skipHalfExpanded = skipHalfExpanded
     )
 
+    val openDialog = remember { mutableStateOf(false) }
     val topBarViewModel = TopBarState.current
     topBarViewModel.isEnabled = true
 //    topBarViewModel.isTopBarActionEnabled = true
     topBarViewModel.topBarActionIcon = Icons.Outlined.MoreVert
-    topBarViewModel.topBarActionFunction = {
-        scope.launch {
-            sheetState.animateTo(ModalBottomSheetValue.Expanded)
+    if (sheetState.isVisible) {
+        topBarViewModel.topBarActionIcon = Icons.Filled.Delete
+        topBarViewModel.topBarActionFunction = {
+            openDialog.value = true
+        }
+    } else {
+        topBarViewModel.topBarActionFunction = {
+            scope.launch {
+                sheetState.animateTo(ModalBottomSheetValue.Expanded)
+            }
         }
     }
 
     reviewState.reviewItem?.let { review ->
+        if (openDialog.value) {
+            AlertDialog(
+                onDismissRequest = {
+                    openDialog.value = false
+                },
+                title = { Text(text = stringResource(id = R.string.review_delete_title)) },
+                text = { Text(text = stringResource(id = R.string.review_delete_text)) },
+                confirmButton = {
+                    TextButton(onClick = {
+                        openDialog.value = false
+                        reviewViewModel.onDeleteReview(reviewId = review.id)
+                        reviewsViewModel.onGetReviews()
+                        navController.navigateUp()
+                    }) {
+                        Text(text = stringResource(id = R.string.btn_delete))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        openDialog.value = false
+                    }) {
+                        Text(text = stringResource(id = R.string.btn_cancel))
+                    }
+                }
+            )
+        }
+
         ModalBottomSheetLayout(
             sheetState = sheetState,
             sheetContent = {

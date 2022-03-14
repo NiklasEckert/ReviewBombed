@@ -13,6 +13,8 @@ import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.core.presentation.TopBarViewModel
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModelState
 import de.niklaseckert.reviewbombed.ui.components.ApplicationSwitcher
 import de.niklaseckert.reviewbombed.ui.theme.ReviewBombedTheme
 
@@ -21,6 +23,7 @@ class MainActivity : ComponentActivity() {
 
     private val accountState by viewModels<AccountViewModel>()
     private val topBarState by viewModels<TopBarViewModel>()
+    private val reviewsViewModelState by viewModels<ReviewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
                 CompositionLocalProvider(
                     AccountState provides accountState,
                     TopBarState provides topBarState,
+                    ReviewsViewModelState provides reviewsViewModelState
                 ) {
                     ApplicationSwitcher()
                 }

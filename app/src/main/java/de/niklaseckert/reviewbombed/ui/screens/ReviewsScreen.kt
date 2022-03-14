@@ -15,6 +15,7 @@ import de.niklaseckert.reviewbombed.R
 import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.components.items.ReviewExcerptItem
 import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModel
+import de.niklaseckert.reviewbombed.feature_review.presentation.ReviewsViewModelState
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
 import de.niklaseckert.reviewbombed.ui.components.general.ReviewBombedBottomNavigation
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
@@ -23,7 +24,8 @@ import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 fun ReviewsScreen(
     navController: NavController
 ) {
-    val reviewsViewModel: ReviewsViewModel = hiltViewModel()
+//    val reviewsViewModel: ReviewsViewModel = hiltViewModel()
+    val reviewsViewModel = ReviewsViewModelState.current
     val reviewsState = reviewsViewModel.state.value
 
     val topBarViewModel = TopBarState.current
