@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
 import de.niklaseckert.reviewbombed.ui.components.items.ListExcerptItem
 import de.niklaseckert.reviewbombed.feature_list.presentation.ListExcerptViewModel
 import de.niklaseckert.reviewbombed.ui.components.ReviewBombedCustomTopBar
@@ -24,28 +25,20 @@ fun ListsScreen(
 ) {
     val listExcerptViewModel: ListExcerptViewModel = hiltViewModel()
     val listExcerptState = listExcerptViewModel.state.value
+    val topBarViewModel = TopBarState.current
+    topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_lists)
 
-    Scaffold(
-        topBar = {
-            ReviewBombedCustomTopBar(text = stringResource(id = R.string.bottom_nav_lists))
-        },
-        bottomBar = {
-            ReviewBombedBottomNavigation(navController = navController)
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-        ) {
-            LazyColumn() {
-                items(listExcerptState.listExcerptItems.size) { index ->
-                    val listExcerpt = listExcerptState.listExcerptItems[index]
+        LazyColumn() {
+            items(listExcerptState.listExcerptItems.size) { index ->
+                val listExcerpt = listExcerptState.listExcerptItems[index]
 
-                    ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
-                }
+                ListExcerptItem(listExcerpt = listExcerpt, navController = navController)
             }
         }
     }
-
 }

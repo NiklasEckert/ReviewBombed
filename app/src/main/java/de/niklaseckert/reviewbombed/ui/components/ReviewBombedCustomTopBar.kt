@@ -12,18 +12,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import de.niklaseckert.reviewbombed.R
+import de.niklaseckert.reviewbombed.core.presentation.TopBarState
+import de.niklaseckert.reviewbombed.core.presentation.TopBarViewModel
 import de.niklaseckert.reviewbombed.feature_login.presentation.AccountState
 import de.niklaseckert.reviewbombed.ui.theme.GeneralUnits
 import kotlinx.coroutines.launch
 
 @Composable
 fun ReviewBombedCustomTopBar(
-    modifier: Modifier = Modifier,
-    text: String = stringResource(id = R.string.app_name)
+    modifier: Modifier = Modifier
 ) {
     val vm = AccountState.current
     val coroutineScope = rememberCoroutineScope()
+    val topBarViewModel = TopBarState.current
 
     Row(
         modifier = modifier
@@ -41,7 +44,7 @@ fun ReviewBombedCustomTopBar(
 
         Column() {
             Text(
-                text = text,
+                text = topBarViewModel.topBarText,
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 24.sp,
                 modifier = Modifier
