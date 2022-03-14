@@ -46,6 +46,7 @@ fun GameDetailScreen(
 
     val topBarViewModel = TopBarState.current
     topBarViewModel.isEnabled = false
+    topBarViewModel.isTopBarActionEnabled = false
 
     gameState.gameItem?.let { game ->
 

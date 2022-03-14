@@ -1,8 +1,12 @@
 package de.niklaseckert.reviewbombed.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +31,11 @@ fun ReviewDetailsScreen(
 
     val topBarViewModel = TopBarState.current
     topBarViewModel.isEnabled = true
+    topBarViewModel.isTopBarActionEnabled = true
+    topBarViewModel.topBarActionIcon = Icons.Outlined.MoreVert
+    topBarViewModel.topBarActionFunction = {
+        Log.d("details", "log")
+    }
 
     Column(
         modifier = Modifier

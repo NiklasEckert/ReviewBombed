@@ -32,6 +32,7 @@ fun ListDetailScreen(
 
     val topBarViewModel = TopBarState.current
     topBarViewModel.isEnabled = true
+    topBarViewModel.isTopBarActionEnabled = false
 
     Column(
         modifier = Modifier
