@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.niklaseckert.reviewbombed.feature_login.data.local.SaveAccount
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.AutomaticSignIn
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignIn
 import de.niklaseckert.reviewbombed.feature_login.domain.use_case.SignOut
@@ -31,7 +32,10 @@ class AccountViewModel @Inject constructor(
     private val automaticSignIn: AutomaticSignIn,
 
     /** Contains the Sign Out Use Case. */
-    private val signOut: SignOut
+    private val signOut: SignOut,
+
+    /** Contains the Save Account class */
+    val saveAccount: SaveAccount
 ) : ViewModel() {
 
     /** Represents if someone is already logged in. */

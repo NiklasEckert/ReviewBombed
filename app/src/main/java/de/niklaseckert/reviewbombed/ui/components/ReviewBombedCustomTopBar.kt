@@ -51,7 +51,15 @@ fun ReviewBombedCustomTopBar(
                 .size(32.dp)
                 .padding(start = GeneralUnits.BASE_PADDING)
         ) {
-
+            IconButton(
+                onClick = {
+                    coroutineScope.launch {
+                        vm.signOutFun()
+                    }
+                }
+            ) {
+                Icon(Icons.Filled.ExitToApp, null)
+            }
         }
 
         Column() {
@@ -67,15 +75,18 @@ fun ReviewBombedCustomTopBar(
                 .size(32.dp)
                 .padding(end = GeneralUnits.BASE_PADDING)
         ) {
-            IconButton(
-                onClick = {
-                    coroutineScope.launch {
-                        vm.signOutFun()
+            if (topBarViewModel.isTopBarActionEnabled) {
+                IconButton(
+                    onClick = {
+                        coroutineScope.launch {
+                            topBarViewModel.topBarActionFunction()
+                        }
                     }
+                ) {
+                    Icon(topBarViewModel.topBarActionIcon, null)
                 }
-            ) {
-                Icon(Icons.Filled.ExitToApp, null)
             }
+
         }
 
 

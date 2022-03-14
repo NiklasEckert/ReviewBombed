@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.niklaseckert.reviewbombed.core.util.Resource
+import de.niklaseckert.reviewbombed.feature_review.data.remote.dto.ReviewPostDto
 import de.niklaseckert.reviewbombed.feature_review.domain.use_case.GetReview
+import de.niklaseckert.reviewbombed.feature_review.domain.use_case.PostReview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -16,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ReviewViewModel @Inject constructor(
     private val getReview: GetReview,
+    private val postReview: PostReview,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -53,6 +56,12 @@ class ReviewViewModel @Inject constructor(
                         }
                     }
                 }.launchIn(this)
+        }
+    }
+
+    fun onEditReview(review: ReviewPostDto, gameId: Long) {
+        viewModelScope.launch {
+            postReview(review = review, gameId = gameId)
         }
     }
 }

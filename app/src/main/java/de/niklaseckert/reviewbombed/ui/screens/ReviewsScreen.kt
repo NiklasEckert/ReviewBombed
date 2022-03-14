@@ -32,6 +32,7 @@ fun ReviewsScreen(
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.bottom_nav_reviews)
     topBarViewModel.isEnabled = true
+    topBarViewModel.isTopBarActionEnabled = false
 
     Column(
         modifier = Modifier

@@ -28,6 +28,7 @@ fun HomeScreen(
     val topBarViewModel = TopBarState.current
     topBarViewModel.topBarText = stringResource(id = R.string.app_name)
     topBarViewModel.isEnabled = true
+    topBarViewModel.isTopBarActionEnabled = false
 
     Column(
         modifier = Modifier
